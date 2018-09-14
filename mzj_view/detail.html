@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>Table</title>
+    <link rel="stylesheet" href="../plugins/layui2/css/layui.css" media="all" />
+    <!-- <link rel="stylesheet" href="css/global.css" media="all">
+    <link rel="stylesheet" href="plugins/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="css/table.css" /> -->
+</head>
+
+<body>
+    <div class="layui-container" id="view" style="margin-top:20px"></div>
+    <script id="detail" type="text/html">
+        <!--行一-->
+        <div class="layui-row">
+            <div class="layui-col-md6">
+                <div class="layui-form-item">
+                    <label class="layui-form-label">姓名:</label>
+                    <div class="layui-input-block">
+                        <input type="text" value="{{data.name}}" name="name" autocomplete="off" readonly="true" class="layui-input">
+                    </div>
+                </div>
+            </div>
+            <div class="layui-col-md6">
+                <div class="layui-form-item">
+                    <label class="layui-form-label">性别:</label>
+                    <div class="layui-input-block">
+                        <input type="text" value="{{data.sex==1?'男':(data.sex==2?'女':'')}}" name="sex" autocomplete="off" readonly="true" class="layui-input">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--行二-->
+        <div class="layui-row">
+            <div class="layui-col-md6">
+                <div class="layui-form-item">
+                    <label class="layui-form-label"><span style="font-size:12.5px">身份证号</span>:</label>
+                    <div class="layui-input-block">
+                        <input type="text" value="{{data.idCard}}" name="idCard" autocomplete="off" readonly="true" class="layui-input">
+                        <!-- <input type="text" name="corporationName" value={{data.corporationName}} autocomplete="off" readonly="true" class="layui-input"> -->
+                    </div>
+                </div>
+            </div>
+            <div class="layui-col-md6">
+                <div class="layui-form-item">
+                    <label class="layui-form-label">区县:</label>
+                    <div class="layui-input-block">
+                        <input type="text" value="{{data.county}}" name="countyId" autocomplete="off" readonly="true" class="layui-input">
+                    </div>
+                </div>
+            </div>
+            <!--行三-->
+            <div class="layui-row">
+                <div class="layui-col-md6">
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">参保人员类别:</label>
+                        <div class="layui-input-block">
+                            <input type="text" value="{{data.userType}}" name="peopleType" autocomplete="off" readonly="true" class="layui-input">
+                        </div>
+                    </div>
+                </div>
+                <div class="layui-col-md6">
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">联系方式:</label>
+                        <div class="layui-input-block">
+                            <input type="text" value="{{data.tel}}" name="tel" autocomplete="off" readonly="true" class="layui-input">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--行四-->
+            <div class="layui-row">
+                <div class="layui-col-md6">
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">统筹区划编码:</label>
+                        <div class="layui-input-block">
+                            <input type="text" value="{{data.insuredNum}}" name="insuredNum" autocomplete="off" readonly="true" class="layui-input">
+                        </div>
+                    </div>
+                </div>
+                <div class="layui-col-md6">
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">统筹区划名称:</label>
+                        <div class="layui-input-block">
+                            <input type="text" value="{{data.insuredCity}}" name="insuredCity" autocomplete="off" readonly="true" class="layui-input">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--行五-->
+            <div class="layui-row">
+            	<div class="layui-col-md6">
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">银行卡号:</label>
+                        <div class="layui-input-block">
+                            <input type="text" value="{{data.bankCard}}" name="bankCard" autocomplete="off" readonly="true" class="layui-input">
+                        </div>
+                    </div>
+                </div>
+                <div class="layui-col-md6">
+                    <div class="layui-form-item">
+                        <label class="layui-form-label"><span style="font-size:12px;margin-left:-15px">开户行</span>:</label>
+                        <div class="layui-input-block">
+                            <input type="text" value="{{data.accountholder}}" name="accountholder" autocomplete="off" readonly="true" class="layui-input">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--行六-->
+            <div class="layui-row">
+            	<div class="layui-col-md6">
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">开户人:</label>
+                        <div class="layui-input-block">
+                            <input type="text" value="{{data.bankname}}" name="bankname" autocomplete="off" readonly="true" class="layui-input">
+                        </div>
+                    </div>
+                </div>
+                <div class="layui-col-md6">
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">承保公司:</label>
+                        <div class="layui-input-block">
+                            <input type="text" value="{{data.underwritecompany}}" name="underwritecompany" autocomplete="off" readonly="true" class="layui-input">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--行7-->
+            <div class="layui-row">
+                <div class="layui-col-md6">
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">服务保险公司:</label>
+                        <div class="layui-input-block">
+                            <input type="text" value="{{data.servicecompany}}" name="servicecompany" autocomplete="off" readonly="true" class="layui-input">
+                        </div>
+                    </div>
+                </div>
+                <div class="layui-col-md6">
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">所属险种:</label>
+                        <div class="layui-input-block">
+                            <input type="text" value="{{data.insurancetype}}" name="insurancetype" autocomplete="off" readonly="true" class="layui-input">
+                        </div>
+                    </div>
+                </div>
+            </div>
+			<div class="layui-row">
+                <div class="layui-col-md6">
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">批改时间:</label>
+                        <div class="layui-input-block">
+                            <input type="text" value="{{data.correctiontime}}" name="correctiontime" autocomplete="off" readonly="true" class="layui-input">
+                        </div>
+                    </div>
+                </div>
+                <div class="layui-col-md6">
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">批增保费:</label>
+                        <div class="layui-input-block">
+                            <input type="text" value="{{data.premium}}" name="premium" autocomplete="off" readonly="true" class="layui-input">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="layui-row">
+                <div class="layui-col-md6">
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">批改保单号:</label>
+                        <div class="layui-input-block">
+                            <input type="text" value="{{data.correctionnumber}}" name="correctionnumber" autocomplete="off" readonly="true" class="layui-input">
+                        </div>
+                    </div>
+                </div>
+                <div class="layui-col-md6">
+                    
+                </div>
+            </div>
+    </script>
+
+
+    <!-- <script type="text/javascript" src="plugins/layui2/layui.js"></script> -->
+
+
+</body>
+<script type="text/javascript" src="../plugins/layui2/layui.js"></script>
+<script type="text/javascript" src="../js/tool.js"></script>
+<script>
+    layui.use(['form', 'layedit', 'laydate', 'element', 'jquery', 'upload', 'laytpl'], function () {
+        var upload = layui.upload;
+        var form = layui.form,
+            layer = layui.layer,
+            layedit = layui.layedit,
+            element = layui.element,
+            laydate = layui.laydate,
+            laytpl = layui.laytpl
+        $ = layui.jquery;
+        //获取token,关闭页面失效
+        var sessionToken = layui.sessionData('token');
+        var index = parent.layer.getFrameIndex(window.name);
+        //分公司url地址\参数\请求参数
+        // var _url2 = 'http://192.168.0.229:8081/filiale/AccountBookOneList';
+        var resData2  = window.localStorage.getItem('protectpersonnel');
+        data = JSON.parse(resData2);
+        console.log(data);
+        var getTpl = detail.innerHTML,
+            view = document.getElementById('view');
+        laytpl(getTpl).render(data, function (html) {
+            view.innerHTML = html;
+        });
+
+    });
+</script>
+
+</html>

@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>Table</title>
+    <link rel="stylesheet" href="./plugins/layui2/css/layui.css" media="all" />
+    <!-- <link rel="stylesheet" href="css/global.css" media="all">
+    <link rel="stylesheet" href="plugins/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="css/table.css" /> -->
+    <style>
+        .mod-header {
+            background: #FFF;
+            /* padding: 2px 20px; */
+            border-bottom: 1px solid #35afee;
+            width: 100%;
+            position: fixed;
+            top: 1px;
+            left: 0px;
+            z-index: 9999;
+            height: 45px;
+        }
+
+        .mod-header .title {
+            font-size: 28px;
+            color: #35afee;
+            font-weight: bold;
+            margin-left: 20px;
+            line-height: 45px;
+        }
+        .modifyitem{
+        	display: none;
+        }
+    </style>
+</head>
+
+
+<body>
+    <div class="layui-container" id="view" style="margin-top:55px">
+        <form class="layui-form">
+            <div class="mod-header">
+                <!-- <img src="../../img/icon_business/借款.png" /> -->
+                <span class="title">信息编辑</span>
+                <button type="button" class="layui-btn  layui-btn-radius layui-btn-primary" lay-submit lay-filter="Fg_info_edit" style="margin-right:20px;margin-top:3px; color: #fff; float: right; background: #1296db">
+                <i class="layui-icon">&#x1005;</i>
+                确定
+            </button>
+                <!-- <span class="layui-btn  layui-btn-radius layui-btn-primary" id="Chose_info" style="margin-top: 25px; color: #fff; float: right; background: #1296db">
+                <i class="layui-icon">&#xe615;</i>
+                查询
+            </span> -->
+            </div>
+
+            <div class="layui-row" style="padding-top: 10px;">
+                <div class="layui-col-md12">
+                    <div class="layui-form-item">
+                        <label class="layui-form-label" style="width: 130px;">请选择要修改的类别:</label>
+                        <div class="layui-input-block" style="margin-left: 160px;">
+                            <select name="" lay-filter="select_type">
+                            	<option value="">请选择</option>
+                            	<option value="outOrganization">区县名称</option>
+                            	<option value="corporationName">服务保险公司</option>
+                            	<option value="insuranceType">所属险种</option>
+                            	<option value="outCause">出险原因</option>
+                            	<option value="outDate">出险日期</option>
+                            	<option value="reportDate">报案日期</option>
+                            	<option value="outManTel">出险人联系方式</option>
+                            	<option value="compensateStatus">赔付进度</option>
+                            	<option value="reportNumber">报案号</option>
+                            	<option value="budgetMoney">估损金额</option>
+                            	<option value="compensateMoney">赔付金额</option>
+                            	<option value="compensateDate">赔付日期</option>
+                            	<option value="serviceSupplierTel">服务人联系方式</option>
+                            	<option value="remark">备注</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="layui-col-md12 outOrganization modifyitem">
+                    <div class="layui-form-item">
+                        <label class="layui-form-label" style="width: 130px;">区县名称:</label>
+                        <div class="layui-input-block" style="margin-left: 160px;">
+                            <input type="text"  name="outOrganization" autocomplete="off" required 
+                                class="layui-input">
+                        </div>
+                    </div>
+                </div>
+                <div class="layui-col-md12 corporationName modifyitem">
+                    <div class="layui-form-item">
+                        <label class="layui-form-label" style="width: 130px;">服务保险公司:</label>
+                        <div class="layui-input-block" style="margin-left: 160px;">
+                            <input type="text"  name="corporationName" autocomplete="off" required 
+                                class="layui-input">
+                        </div>
+                    </div>
+                </div>
+                <div class="layui-col-md12 insuranceType modifyitem">
+                    <div class="layui-form-item">
+                        <label class="layui-form-label" style="width: 130px;">所属险种:</label>
+                        <div class="layui-input-block" style="margin-left: 160px;">
+                            <input type="text"  name="insuranceType" autocomplete="off" required 
+                                class="layui-input">
+                        </div>
+                    </div>
+                </div>
+                <div class="layui-col-md12 outCause modifyitem">
+                    <div class="layui-form-item">
+                        <label class="layui-form-label" style="width: 130px;">出险原因:</label>
+                        <div class="layui-input-block" style="margin-left: 160px;">
+                            <input type="text"  name="modifyitem" autocomplete="off" required 
+                                class="layui-input">
+                        </div>
+                    </div>
+                </div>
+                <div class="layui-col-md12 outDate modifyitem">
+                    <div class="layui-form-item">
+                        <label class="layui-form-label" style="width: 130px;">出险日期:</label>
+                        <div class="layui-input-block" style="margin-left: 160px;">
+                            <input type="text"  name="outDate" autocomplete="off" required 
+                                class="layui-input showTime">
+                        </div>
+                    </div>
+                </div>
+                <div class="layui-col-md12 reportDate modifyitem">
+                    <div class="layui-form-item">
+                        <label class="layui-form-label" style="width: 130px;">报案日期:</label>
+                        <div class="layui-input-block" style="margin-left: 160px;">
+                            <input type="text"  name="reportDate" autocomplete="off" required 
+                                class="layui-input showTime">
+                        </div>
+                    </div>
+                </div>
+                <div class="layui-col-md12 outManTel modifyitem">
+                    <div class="layui-form-item">
+                        <label class="layui-form-label" style="width: 130px;">出险人联系方式:</label>
+                        <div class="layui-input-block" style="margin-left: 160px;">
+                            <input type="text"  name="outManTel" autocomplete="off" required 
+                                class="layui-input">
+                        </div>
+                    </div>
+                </div>
+                <div class="layui-col-md12 compensateStatus modifyitem">
+                    <div class="layui-form-item">
+                        <label class="layui-form-label" style="width: 130px;">赔付进度:</label>
+                        <div class="layui-input-block" style="margin-left: 160px;">
+                            <input type="text"  name="compensateStatus" autocomplete="off" required 
+                                class="layui-input">
+                        </div>
+                    </div>
+                </div>
+                <div class="layui-col-md12 reportNumber modifyitem">
+                    <div class="layui-form-item">
+                        <label class="layui-form-label" style="width: 130px;">报案号:</label>
+                        <div class="layui-input-block" style="margin-left: 160px;">
+                            <input type="text"  name="reportNumber" autocomplete="off" required 
+                                class="layui-input">
+                        </div>
+                    </div>
+                </div>
+                <div class="layui-col-md12 budgetMoney modifyitem">
+                    <div class="layui-form-item">
+                        <label class="layui-form-label" style="width: 130px;">估损金额:</label>
+                        <div class="layui-input-block" style="margin-left: 160px;">
+                            <input type="text"  name="budgetMoney" autocomplete="off" required 
+                                class="layui-input">
+                        </div>
+                    </div>
+                </div>
+                <div class="layui-col-md12 compensateMoney modifyitem">
+                    <div class="layui-form-item">
+                        <label class="layui-form-label" style="width: 130px;">赔付金额:</label>
+                        <div class="layui-input-block" style="margin-left: 160px;">
+                            <input type="text"  name="compensateMoney" autocomplete="off" required 
+                                class="layui-input">
+                        </div>
+                    </div>
+                </div>
+                <div class="layui-col-md12 compensateDate modifyitem">
+                    <div class="layui-form-item">
+                        <label class="layui-form-label" style="width: 130px;">赔付日期:</label>
+                        <div class="layui-input-block" style="margin-left: 160px;">
+                            <input type="text"  name="compensateDate" autocomplete="off" required 
+                                class="layui-input showTime">
+                        </div>
+                    </div>
+                </div>
+                <div class="layui-col-md12 serviceSupplierTel modifyitem">
+                    <div class="layui-form-item">
+                        <label class="layui-form-label" style="width: 130px;">服务人联系方式:</label>
+                        <div class="layui-input-block" style="margin-left: 160px;">
+                            <input type="text"  name="serviceSupplierTel" autocomplete="off" required 
+                                class="layui-input">
+                        </div>
+                    </div>
+                </div>
+                <div class="layui-col-md12 remark modifyitem">
+                    <div class="layui-form-item">
+                        <label class="layui-form-label" style="width: 130px;">备注:</label>
+                        <div class="layui-input-block" style="margin-left: 160px;">
+                            <textarea name="remark" placeholder="请输入备注" class="layui-textarea" required ></textarea>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--行二-->
+            
+
+        </form>
+	</div>
+    <!-- <script type="text/javascript" src="plugins/layui2/layui.js"></script> -->
+
+
+</body>
+<script type="text/javascript" src="./plugins/layui2/layui.js"></script>
+<script type="text/javascript" src="./js/tool.js"></script>
+<script>
+    layui.use(['form', 'layedit', 'laydate', 'element', 'jquery', 'upload', 'laytpl'], function () {
+        var upload = layui.upload;
+        var form = layui.form,
+            layer = layui.layer,
+            layedit = layui.layedit,
+            element = layui.element,
+            laydate = layui.laydate,
+            laytpl = layui.laytpl
+        $ = layui.jquery;
+//      layer.load();
+        //1.总公司 2.分公司 3.民政局
+        var mark = objTool.getUrlParam('mark');
+        //该条数据的id
+        var ids = objTool.getUrlParam('ids');
+        //获取token,关闭页面失效
+        var sessionToken = layui.sessionData('token');
+        // console.log(localTest.nickname); //获得“贤心”
+        var index = parent.layer.getFrameIndex(window.name);
+
+        //分公司url地址\参数\请求参数
+        // var _url2 = 'http://192.168.0.229:8081/filiale/AccountBookOneList';
+        //单条数据加载url
+        var _urlDataOne = objTool.url + 'filiale/AccountBookTwoList';
+        //单条数据编辑提交url
+        var _urlEditDataOne = objTool.url + 'filiale/updateAccountBookTwo';
+		var select_type = '';
+        var resData2;
+        var id_s = ids.split(",");
+        var alldatas = [];
+        if (mark == 1) {
+
+        } else if (mark == 2) {
+        	//分公司编辑数据加载
+        	getdatas(0);
+            //加载日期选择
+            $('.showTime').each(function () {
+                laydate.render({
+                    elem: this, //使用this指向当前元素
+                    position: 'abolute'
+                });
+            });
+
+        } else if (mark == 3) {}
+        function getdatas(num){
+        	if(num<id_s.length){
+        		var data2 = {
+		            id: id_s[num],
+		            page: 1,
+		            size: 1
+		        }
+        		var resData2 = Fun_Ajax_Data_Origin(_urlDataOne, data2, "post");
+        		alldatas.push(resData2.data[0]);
+        		num++;
+        		getdatas(num);
+        	}else{
+        		
+        	}
+        }
+        //监听提交按钮
+        form.on('submit(Fg_info_edit)', function (data) {
+            data = data.field;
+            data.ids = ids;
+            console.log(data);
+            if(select_type==''){
+            	layer.msg("请选择要修改的类别");
+            }else if(data[''+select_type]==""){
+            	layer.msg("请输入要修改的内容");
+            }else{
+            	for(var i=0;i<alldatas.length;i++){
+            		alldatas[i][''+select_type] = data[''+select_type];
+            	}
+            	submitalldatas(0);
+            }
+            // data.id = id;
+            // console.log(JSON.stringify(data));
+
+            // return false;
+        });
+
+        form.on('select(select_type)', function(data){
+        	$(".modifyitem").hide();
+        	$('.'+data.value).find('input').val("");
+        	$('.'+data.value).show();
+        	select_type = data.value;
+		});
+		function submitalldatas(num){
+			if(num<alldatas.length){
+        		/*
+		         *编辑数据提交
+		         **/
+		        $.ajax({
+	                type: "POST",
+	                async: false,
+	                timeout: 20000, // 超时时间 10 秒
+	                headers: {
+	                    'authorization': sessionToken.access_token
+	                    // 'authorization': 'eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiI2IiwiQVVUSE9SSVRJRVNfS0VZIjoiNiIsImV4cCI6MTUzNzIzNTM0M30.d_x4NQXsBu97yY2Ir-qTIrIpjQA-JQGvuCQWVUjrBsEBgXFkslxndYjAqiu0-EQCoeC-GZL7sxgvKdMW602j1w'
+	                },
+	                url: _urlEditDataOne,
+	                data: alldatas[num],
+	                // async: false,
+	                success: function (res) {
+	                    // alert(res.code)
+	                    console.log('33333')
+	                    console.log(res);
+	                    //检查返回的标志
+	                    if (res.code == 1) {
+	                    	num++;
+	                   		submitalldatas(num)
+	                    } else if (res.code == 2) {
+	                        layer.msg(res.msg + ',即将跳转登录界面');
+	                        var tmid = window.setTimeout(function () {
+	                            top.location.href = 'login.html'
+	                            window.clearTimeout(tmid);
+	                        }, 1500);
+	
+	                    } else {
+	                        layer.msg('请求失败');
+	                    }
+	                },
+	                error: function (err) {
+	                    console.log('错误');
+	                    console.log(err);
+	                },
+	                // complete: function (XMLHttpRequest, status) { //请求完成后最终执行参数　
+	                // }
+	            })
+        	}else{
+        		layer.msg("批量修改成功");
+        		var tmid = window.setTimeout(function () {
+                    window.parent.Active.Fun_Ajax_Table_Data2(
+                        objTool.url + 'filiale/AccountBookTwoList', null);
+                    parent.layer.close(index);
+                    window.clearTimeout(tmid);
+                }, 1000);
+        	}
+		}
+		function Fun_Ajax_Data_Origin(_url, _data, type) {
+            var dataObject = {};
+            $.ajax({
+                type: type,
+                timeout: 10000, // 超时时间 10 秒
+                headers: {
+                    'authorization': sessionToken.access_token
+                    // 'authorization': 'eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiI2IiwiQVVUSE9SSVRJRVNfS0VZIjoiNiIsImV4cCI6MTUzNjczNDQ4NH0.m7cQGa-xinxjEefiV5-l5bIJLYQdcFSYii3S-aan6okhxv8qwwlZpKCsQgKedKNttRAtrOP4xnb_X3_F1HdJgw'
+                },
+                url: _url,
+                data: _data,
+                async: false,
+                success: function (res) {
+                    console.log(res);
+                    // res = JSON.parse(res);
+                    //检查返回的标志
+                    if (res.code == 1) {
+                        dataObject.code = "0";
+                        dataObject.msg = "";
+                        dataObject.count = res.data.totalElements;
+                        dataObject.data = res.data.content;
+                        // debugger;
+                        // return
+
+                    } else if (res.code == 2) {
+                        layer.msg(res.msg + ',即将跳转登录界面');
+                        var tmid = window.setTimeout(function () {
+                            top.location.href = 'login.html'
+                            window.clearTimeout(tmid);
+                        }, 1500);
+
+                    } else {
+                        layer.msg(res.msg);
+                    }
+                },
+                error: function (err) {},
+                complete: function (XMLHttpRequest, status) { //请求完成后最终执行参数　
+                }
+            })
+            return dataObject;
+        }
+
+    });
+</script>
+
+</html>

@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<title>项目信息管理系统</title>
+
+	<!-- 页面基本设置禁止随意更改 -->
+	<meta charset="utf-8">
+	<meta name="author" content="forework">
+	<meta name="format-detection" content="telephone=no">
+	<meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+	<meta name="apple-mobile-web-app-capable" content="yes">
+	<meta name="mobile-web-app-capable" content="yes">
+	<meta name="apple-mobile-web-app-status-bar-style" content="black">
+	<meta name="msapplication-tap-highlight" content="no">
+	<meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+	<!-- 页面基本设置禁止随意更改 -->
+	<!-- 基础CSS类库可随意更改 -->
+	<link rel="stylesheet" href="plugins/layui2/css/layui.css" media="all" />
+	<link rel="stylesheet" type="text/css" href="css/login_css/less.css">
+	<link rel="stylesheet" type="text/css" href="css/login_css/basic.css">
+
+
+
+	<!--[if IE 8]>
+			<link rel="stylesheet" type="text/css" href="media/login_css/ie8.css">
+		<![endif]-->
+	<!--[if gte IE 9]> 
+				<link rel="stylesheet" type="text/css" href="media/login_css/ie.css"> 
+		<![endif]-->
+	<!-- 基础CSS类库可随意更改 -->
+	<!-- 基础js类库可随意更改 -->
+
+	<!-- 基础js类库可随意更改 -->
+</head>
+
+<body>
+	<div class="wrapper mydiv" style="background-color: white; ">
+		<div class="login-top">
+			<div style="height: 60px;background-color: white;">
+				<div style="margin-left: 5%;">
+					<img src="images/login_images/log_1.jpg" />
+				</div>
+			</div>
+			<div class="login-topBg">
+				<div class="login-topBg1">
+
+					<div class="login-topStyle">
+
+						<div class="login-topStyle3" id="loginStyle" style="margin-top: 70px; margin-left: 20px;">
+							<form>
+								<h3 style="text-align: center;">欢迎使用</h3>
+
+								<div class="ui-form-item loginUsername">
+									<input type="username" placeholder="请输入账号">
+								</div>
+								<div class="ui-form-item loginPassword">
+									<input type="password" placeholder="请输入密码">
+								</div>
+								<a style="width: 235px;" id="sub_go" class="btnStyle btn-register" href="javascript:;">登&nbsp;录</a>
+								<div style="height: 20px;"></div>
+								<!-- <span class="error_xinxi">注:用户名和密码与OA一致</span> -->
+							</form>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- <div class="loginCen" style="margin-top: 45px;">
+			<div class="login-center">
+				<div class="loginCenter-moudle">
+
+					<div class="loginCenter-moudleRight" style="  width: 1067px;">
+
+						<a class="loginCenter-mStyle loginCenter-moudle1" id="moudleRemove" style=" display:block;width: 340px;">
+								<span class="moudle-img"><img src="media/login_images/login_bg_01.png"></span>
+								<span class="moudle-text"> 
+					            <span class="moudle-text1" style="font-family:'微软雅黑'">标准化</span>
+								<span class="moudle-text2" style="font-family:'微软雅黑'">Standardization</span>
+								</span>
+							</a>
+
+						<a class="loginCenter-mStyle loginCenter-moudle2" style=" display:block; width: 357px;" id="moudleRemove2">
+								<span class="moudle-img"><img src="media/login_images/login_bg_02.png"></span>
+								<span class="moudle-text">
+        					    <span class="moudle-text1" style="font-family:'微软雅黑'"> 结构化</span>
+								<span class="moudle-text2" style="font-family:'微软雅黑'">Structurization</span>
+								</span>
+							</a>
+
+						<a class="loginCenter-mStyle loginCenter-moudle3" style=" display:block;" id="moudleRemove3">
+								<span class="moudle-img"><img src="media/login_images/login_bg_03.png"></span>
+								<span class="moudle-text"> 
+                				<span class="moudle-text"> <span class="moudle-text1" style="font-family:'微软雅黑'">数字化 </span>
+								<span class="moudle-text2" style="font-family:'微软雅黑'">Digitization</span>
+								</span>
+								</span>
+							</a>
+
+
+					</div>
+				</div>
+			</div>
+		</div> -->
+		<div class="footer"> <span class="footerText">使用过程中有任何问题,请联系:023-67921145 </span> </div>
+	</div>
+</body>
+<script type="text/javascript" src="js/jquery-1.10.1.min.js"></script>
+<script type="text/javascript" src="plugins/layui2/layui.js"></script>
+<script type="text/javascript" src="js/tool.js"></script>
+<script>
+	$(function () {
+		$(window).resize();
+	});
+
+	$(window).resize(function () {
+		$(".mydiv").css({
+			position: "absolute",
+			left: ($(window).width() - $(".mydiv").outerWidth()) / 2,
+			top: ($(window).height() - $(".mydiv").outerHeight()) / 2
+		});
+	});
+	layui.use(['form', 'layedit', 'laydate', 'element', 'jquery', 'upload', 'laytpl'], function () {
+		var upload = layui.upload;
+		var form = layui.form,
+			layer = layui.layer,
+			layedit = layui.layedit,
+			element = layui.element,
+			laydate = layui.laydate,
+			laytpl = layui.laytpl
+		$ = layui.jquery;
+		var _url = objTool.url + 'login'
+		$('#sub_go').on('click', function () {
+			var _data = {};
+			_data.account = $('.loginUsername input').val();
+			_data.password = $('.loginPassword input').val();
+			// console.log(account + 'xx' + password)
+			if (_data.account == "" || _data.password == "") {
+				layer.msg('请输入账号或密码');
+			} else {
+				objTool.Get_Access_token(_url, _data);
+			}
+
+		});
+
+	});
+</script>
+
+</html>

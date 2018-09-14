@@ -1,0 +1,677 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="UTF-8">
+	<title>Table</title>
+	<link rel="stylesheet" href="plugins/layui2/css/layui.css" media="all" />
+	<link rel="stylesheet" href="css/global.css" media="all">
+	<link rel="stylesheet" href="plugins/font-awesome/css/font-awesome.min.css">
+	<link rel="stylesheet" href="css/table.css" />
+</head>
+
+<body>
+	<div class="admin-main">
+		<blockquote class="layui-elem-quote">
+			<input type="text" style="width:15%;display:inline-block" name="title" lay-verify="title" autocomplete="off" placeholder="姓名"
+			    class="layui-input keyName2">
+			<input type="text" style="width:15%;display:inline-block" name="title" lay-verify="title" autocomplete="off" placeholder="身份证号"
+			    class="layui-input keyBodyID2">
+			<a href="javascript:;" class="layui-btn layui-btn-small" id="search2">
+					<i class="layui-icon">&#xe615;</i> 搜索
+				</a>
+			<!-- <a href="#" class="layui-btn layui-btn-small" id="put">
+					<i class="layui-icon">&#xe608;</i>推送
+				</a> -->
+			<a href="javascript:;" class="layui-btn layui-btn-small" id="export2">
+					<i class="fa fa-shopping-cart" aria-hidden="true"></i> 导出
+				</a>
+			<a href="javascript:;" class="layui-btn layui-btn-small" id="import2">
+					<i class="layui-icon">&#xe608;</i>导入
+				</a>
+
+			<a href="javascript:;" class="layui-btn layui-btn-small" id="add2">
+					<i class="fa fa-shopping-cart" aria-hidden="true"></i> 新增
+				</a>
+			<a href="javascript:;" class="layui-btn layui-btn-small" id="delect_items2">
+					<i class="fa fa-shopping-cart" aria-hidden="true"></i> 批量删除
+				</a>
+			
+			<a href="javascript:;" class="layui-btn layui-btn-small" id="edit_items2">
+					<i class="fa fa-shopping-cart" aria-hidden="true"></i> 批量修改
+				</a>
+			<div class="layui-row" style="margin-top:8px">
+				<a href="javascript:;" class="layui-btn layui-btn-small" id="delect_items2">
+					<i class="fa fa-shopping-cart" aria-hidden="true"></i> 批量推送
+				</a>
+				<a href="javascript:;" class="layui-btn layui-btn-small" id="add_LP_Data">
+					<i class="layui-icon">&#xe608;</i> 推送理赔人员数据
+				</a>
+			</div>
+		</blockquote>
+		<div style="width: 100%; margin: auto;">
+			<table class="layui-table" id="Fk_Ifon2" lay-filter="Fk_Ifon2">
+			</table>
+		</div>
+
+	</div>
+	</div>
+	</div>
+	<script type="text/javascript" src="plugins/layui2/layui.js"></script>
+	<script type="text/javascript" src="./js/tool.js"></script>
+	<script type="text/html" id="barDemo">
+		<div class="layui-btn-group demoTable">
+			<a class="layui-btn layui-btn-normal layui-btn-xs" lay-event="detail">详情</a>
+			<a class="layui-btn layui-btn-xs layui-btn-normal" lay-event="edit">编辑</a>
+			<a class="layui-btn layui-btn-normal layui-btn-xs" lay-event="del">删除</a>
+		</div>
+	</script>
+	<script>
+		layui.config({
+			base: 'plugins/layui2/modules/'
+		});
+		layui.use(['form', 'layedit', 'laydate', 'element', 'table', 'jquery', 'upload', 'laytpl'], function () {
+			var upload = layui.upload;
+			var form = layui.form,
+				layer = layui.layer,
+				layedit = layui.layedit,
+				element = layui.element,
+				laydate = layui.laydate,
+				$ = layui.jquery,
+				table = layui.table;
+			//iframe层父子通信参数
+			// var layerIndexObject = {};
+			var tabMark = 0;
+			//获取token,关闭页面失效
+			var sessionToken = layui.sessionData('token');
+			//监听tab切换事件
+			//1.总公司 2.分公司 3.民政局
+			//分公司url地址\参数\请求参数
+			var _url2 = objTool.url + 'filiale/AccountBookOneList?time=' + new Date().getTime();
+			var _url2_Tab2 = objTool.url + 'filiale/AccountBookTwoList'
+			//民政局url地址\参数\请求参数
+			var _url3 = objTool.url + ''
+			var tableIns,
+				tableIns2;
+			//定义到公用对象里，子层调用
+			Active = {
+				//封装ajax,获取数据,刷新表格,账目一
+				Fun_Ajax_Table_Data: function (_url, _data) {
+					return table.render({
+						elem: '#Fk_Ifon',
+						method: 'post',
+						url: _url,
+						height: 'full-190',
+						headers: {
+							'authorization': sessionToken.access_token
+							// 'authorization': 'eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiI2IiwiQVVUSE9SSVRJRVNfS0VZIjoiNiIsImV4cCI6MTUzNjgyMTg4OX0.RDU5XY7M1jvm46IDY3kSSRUCB9pNpColeUXnr_MROsxAbC7oGWpzmKEJx4H8Vf1hjMSDgTWQWdqn7dv3h9TNzw'
+						},
+						parseData: function (res) { //res 即为原始返回的数据
+							console.log(res)
+							return {
+								"code": res.code, //解析接口状态
+								"msg": res.msg, //解析提示文本
+								"totalElements": res.data.totalElements, //解析数据长度
+								"data": res.data.content //解析数据列表
+							};
+							// debugger;
+						},
+						where: _data,
+						request: {
+							// pageName: 'page' //页码的参数名称，默认：page
+							// 	,
+							limitName: 'size' //每页数据量的参数名，默认：limit
+						},
+						response: {
+							statusName: 'code',
+							statusCode: 1,
+							msgName: 'msg',
+							countName: 'totalElements',
+
+						},
+						done: function (res) {
+							if (res.code == 2) {
+								layer.msg(res.msg + ',即将跳转登录界面');
+								var tmid = window.setTimeout(function () {
+									top.location.href = 'login.html'
+									window.clearTimeout(tmid);
+								}, 1500);
+
+							}
+							layer.closeAll('loading');
+						},
+						text: {
+							none: '<p align="center" style="padding:50px 50px">无数据</p>'
+						},
+						cols: [
+							[{
+									type: 'checkbox',
+									fixed: 'left'
+								},
+								{
+									title: '序号',
+									width: 60,
+									event: 'event_detail',
+									type: 'numbers'
+								},
+								{
+									field: 'theInsured',
+									title: '姓名',
+									width: 180
+								},
+								{
+									field: 'theInsuredPapersNum',
+									title: '身份证号',
+									width: 150,
+									// align: 'right',
+
+								},
+								{
+									field: 'organization',
+									title: '承保机构',
+									width: 150,
+
+								},
+								{
+									field: 'insuranceTypeInfo',
+									title: '险种信息',
+									width: 150,
+								},
+								{
+									field: 'duty',
+									title: '责任信息',
+									width: 150,
+								},
+								{
+									field: 'insureCorporation',
+									title: '投保单位',
+									width: 205,
+								},
+								{
+									field: 'warrantyNum',
+									title: '保单号',
+									width: 90,
+								},
+								{
+									field: 'reportNumber',
+									title: '报案号',
+									width: 180
+								},
+								{
+									field: 'reportDate',
+									title: '报案日期',
+									width: 180
+								}, {
+									field: 'HospitalizedStartDate',
+									title: '入院时间',
+									width: 180
+								}, {
+									field: 'HospitalizedEndDate',
+									title: '出院时间',
+									width: 180
+								}, {
+									field: 'HospitalizedOutCause',
+									title: '出院原因',
+									width: 180
+								}, {
+									field: 'totalMedicalFee',
+									title: '总医疗费',
+									width: 180
+								}, {
+									field: 'compensateMoney',
+									title: '医保报销金额',
+									width: 180
+								}, {
+									field: 'selfPayingMoney',
+									title: '个人自费费用',
+									width: 180
+								}, {
+									field: 'compensateNumber',
+									title: '赔案号',
+									width: 180
+								}, {
+									field: 'realityCompensateMoney',
+									title: '实际赔付金额',
+									width: 180
+								},
+								// {
+								// 	field: 'kh',
+								// 	title: '银行卡号',
+								// 	width: 280
+								// },
+								// //{ field: 'VC_ProjectZX', title: '项目名称', width: 190 },
+								{
+									title: '操作',
+									toolbar: '#barDemo',
+									align: 'center',
+									fixed: 'right',
+									width: 150
+								},
+							]
+						],
+						limit: 20,
+						page: {
+							limits: [10, 20, 30, 50, 100, 200, 300, 400, 500],
+							prev: '上一页',
+							next: '下一页',
+							layout: ['prev', 'page', 'next', 'limit', 'count', 'skip']
+						}
+						// size: 20,
+						// page: true
+					});
+
+				},
+				//封装ajax,获取数据,刷新表格,账目二
+				Fun_Ajax_Table_Data2: function (_url, _data) {
+					return table.render({
+						elem: '#Fk_Ifon2',
+						method: 'post',
+						url: _url,
+						height: 'full-190',
+						headers: {
+							'authorization': sessionToken.access_token
+							// 'authorization': 'eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiI2IiwiQVVUSE9SSVRJRVNfS0VZIjoiNiIsImV4cCI6MTUzNjgyMTg4OX0.RDU5XY7M1jvm46IDY3kSSRUCB9pNpColeUXnr_MROsxAbC7oGWpzmKEJx4H8Vf1hjMSDgTWQWdqn7dv3h9TNzw'
+						},
+						parseData: function (res) { //res 即为原始返回的数据
+							return {
+								"code": res.code, //解析接口状态
+								"msg": res.msg, //解析提示文本
+								"totalElements": res.data.totalElements, //解析数据长度
+								"data": res.data.content //解析数据列表
+							};
+							// debugger;
+						},
+						where: _data,
+						request: {
+							// pageName: 'page' //页码的参数名称，默认：page
+							// 	,
+							limitName: 'size' //每页数据量的参数名，默认：limit
+						},
+						response: {
+							statusName: 'code',
+							statusCode: 1,
+							msgName: 'msg',
+							countName: 'totalElements',
+
+						},
+						done: function (res) {
+							if (res.code == 2) {
+								layer.msg(res.msg + ',即将跳转登录界面');
+								var tmid = window.setTimeout(function () {
+									top.location.href = 'login.html'
+									window.clearTimeout(tmid);
+								}, 1500);
+
+							}
+							layer.closeAll('loading');
+						},
+						text: {
+							none: '<p align="center" style="padding:50px 50px">无数据</p>'
+						},
+						cols: [
+							[{
+									type: 'checkbox',
+									fixed: 'left'
+								},
+								{
+									title: '序号',
+									width: 60,
+									event: 'event_detail',
+									type: 'numbers'
+								},
+								{
+									field: 'outOrganization',
+									title: '出险机构（区县名称）',
+									width: 180
+								},
+								{
+									field: 'corporationName',
+									title: '服务保险公司',
+									width: 150,
+									// align: 'right',
+
+								},
+								{
+									field: 'insuranceType',
+									title: '所属险种',
+									width: 150,
+
+								},
+								{
+									field: 'outDanger',
+									title: '出险人',
+									width: 150,
+								},
+								{
+									field: 'outCause',
+									title: '出险原因',
+									width: 150,
+								},
+								{
+									field: 'outDate',
+									title: '出险日期',
+									width: 205,
+								},
+								{
+									field: 'reportDate',
+									title: '报案日期',
+									width: 90,
+								},
+								{
+									field: 'outManTel',
+									title: '出险人联系方式',
+									width: 180
+								},
+								{
+									field: 'compensateStatus',
+									title: '赔付进度',
+									width: 180
+								}, {
+									field: 'reportNumber',
+									title: '报案号',
+									width: 180
+								}, {
+									field: 'budgetMoney',
+									title: '估损金额',
+									width: 180
+								}, {
+									field: 'compensateMoney',
+									title: '赔付金额',
+									width: 180
+								}, {
+									field: 'compensateDate',
+									title: '赔付日期',
+									width: 180
+								}, {
+									field: 'serviceSupplierTel',
+									title: '服务人联系方式',
+									width: 180
+								}, {
+									field: 'remark',
+									title: '备注',
+									width: 180
+								}, {
+									title: '操作',
+									toolbar: '#barDemo',
+									align: 'center',
+									fixed: 'right',
+									width: 150
+								}
+							]
+						],
+						limit: 20,
+						page: {
+							limits: [10, 20, 30, 50, 100, 200, 300, 400, 500],
+							prev: '上一页',
+							next: '下一页',
+							layout: ['prev', 'page', 'next', 'limit', 'count', 'skip']
+						}
+						// size: 20,
+						// page: true
+					});
+
+				}
+			}
+			//---------
+			var mark = objTool.getUrlParam('mark');
+			if (mark == 1) {
+				//总公司
+			} else if (mark == 2) {
+				//分公司
+				layer.load();
+				tableIns2 = Active.Fun_Ajax_Table_Data2(_url2_Tab2, null);
+				tabMark = 1;
+
+			} else if (mark == 3) {
+				//民政局
+
+			}
+			//监听顶部事件操作
+			//新增
+			$('#add2').on('click', function () {
+				layer.open({
+					type: 2,
+					shadeClose: true,
+					title: "",
+					shade: [0.9, '#f8f8f8'],
+					area: ['98%', '95%'],
+					content: 'fgs_view/addTab2.html?mark=' + mark + '&time=' + new Date().getTime()
+				});
+			});
+			//模糊查询
+			//tab2
+			$('#search2').on('click', function () {
+				var mohu_data = {};
+				mohu_data.outDanger = $('.keyName2').val();
+				// mohu_data.theInsuredPapersNum = $('.keyBodyID').val();
+				// tableIns = Fun_Ajax_Table_Data(_url2);	
+				console.log(mohu_data);
+				tableIns2.reload({
+					where: mohu_data,
+					page: {
+						curr: 1 //重新从第 1 页开始
+					},
+
+				});
+			});
+			//批量删除
+			$('#delect_items2').on('click', function () {
+				var ids = [];
+				var checkStatus = table.checkStatus('Fk_Ifon2'),
+					data = checkStatus.data;
+				if (data.length < 1) {
+					layer.msg('请选择要删除的数据');
+				} else {
+					for (var i = 0; i < data.length; i++) {
+						ids.push(data[i].id);
+					}
+					ids = ids.join(',')
+					// console.log(ids);
+					// console.log(ids.length);
+					// fun_delect_data(mark, ID, _url)
+					layer.confirm('确定删除该' + data.length + '数据吗?', function (index) {
+						fun_delect_data(ids, objTool.url + 'filiale/deleteAccountBookTwo');
+						tableIns2.reload({
+							page: {
+								curr: 1 //重新从第 1 页开始
+							}
+						});
+						ids = [];
+					});
+				}
+
+			});
+			//批量修改
+			$('#edit_items2').on('click',function(){
+				var ids = [];
+				var checkStatus = table.checkStatus('Fk_Ifon2'),
+					data = checkStatus.data;
+					if (data.length < 1) {
+					layer.msg('请选择要修改的数据');
+				} else {
+					for (var i = 0; i < data.length; i++) {
+						ids.push(data[i].id);
+					}
+					ids = ids.join(',')
+					layer.open({
+						type: 2,
+						shadeClose: true,
+						title: "",
+						shade: [0.9, '#f8f8f8'],
+						area: ['98%', '95%'],
+						content: 'batchEditor.html?mark=' + mark + '&ids=' + ids + '&time=' + new Date()
+					});
+				}
+			})
+			//新增推送理赔人员
+			$("#add_LP_Data").on('click',function(){
+				var ids = [];
+				var checkStatus = table.checkStatus('Fk_Ifon2'),
+					data = checkStatus.data;
+				if (data.length < 1) {
+					layer.msg('请选择要新增理赔人员的数据');
+				} else {
+					for (var i = 0; i < data.length; i++) {
+						ids.push(data[i].id);
+					}
+					ids = ids.join(',')
+					
+					layer.confirm('确定新增这' + data.length + '条数据到理赔人员吗?', function (index) {
+						console.log(ids);
+						fun_push_lp_data(ids, objTool.url + 'civilAffairsBureau/addCompensateData');
+						tableIns2.reload({
+							page: {
+								curr: 1 //重新从第 1 页开始
+							}
+						});
+						ids = [];
+					});
+				}
+			})
+			//导入事件
+			//tab
+			$('#import2').on('click', function () {
+				layer.open({
+					type: 2,
+					shadeClose: true,
+					title: "",
+					shade: [0.9, '#f8f8f8'],
+					area: ['50%', '40%'],
+					content: 'fgs_view/upload.html'
+				});
+			});
+
+			//导出事件
+			//tab2
+			$('#export2').on('click', function () {
+				var mohu_data = {};
+				mohu_data.outDanger = $('.keyName2').val();
+				// mohu_data.theInsuredPapersNum = $('.keyBodyID').val();
+				window.open(objTool.url + 'filiale/excelOutAccountBookTwo?outDanger=' + mohu_data.outDanger)
+
+			});
+
+			//监听工具条操作
+			//tab2
+			table.on('tool(Fk_Ifon2)', function (obj) {
+				var data = obj.data;
+				var layEvent = obj.event;
+				var tr = obj.tr;
+				if (layEvent === 'detail') {
+					// layer.msg('详情');
+					layer.open({
+						type: 2,
+						shadeClose: true,
+						title: '<h2>详情查看</h2>',
+						shade: [0.9, '#f8f8f8'],
+						area: ['98%', '95%'],
+						content: 'fgs_view/detailTab2.html?mark=' + mark + '&id=' + data.id
+					});
+				} else if (layEvent === 'del') {
+					layer.confirm('确定删除该笔数据吗?', function (index) {
+						fun_delect_data(data.id, objTool.url + 'filiale/deleteAccountBookTwo');
+						tableIns2.reload({
+							page: {
+								curr: 1 //重新从第 1 页开始
+							}
+						});
+					});
+				} else if (layEvent === 'edit') {
+					// layer.msg('编辑');
+					layer.open({
+						type: 2,
+						shadeClose: true,
+						title: "",
+						shade: [0.9, '#f8f8f8'],
+						area: ['98%', '95%'],
+						content: 'fgs_view/editTab2.html?mark=' + mark + '&id=' + data.id + '&time=' + new Date()
+					});
+				}
+			});
+			//---------end---------
+
+
+
+			/**
+			 * 删除数据方法
+			 * */
+			function fun_delect_data(ID, _url) {
+				$.ajax({
+					type: "POST",
+					timeout: 10000, // 超时时间 10 秒
+					async: false,
+					headers: {
+						'authorization': sessionToken.access_token
+						// 'authorization': 'eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiI2IiwiQVVUSE9SSVRJRVNfS0VZIjoiNiIsImV4cCI6MTUzNjgyMTg4OX0.RDU5XY7M1jvm46IDY3kSSRUCB9pNpColeUXnr_MROsxAbC7oGWpzmKEJx4H8Vf1hjMSDgTWQWdqn7dv3h9TNzw'
+					},
+					url: _url,
+					data: {
+						'ids': ID
+					},
+					success: function (res) {
+						// res = JSON.parse(res);
+						//检查返回的标志
+						if (res.code == 1) {
+							layer.msg(res.msg);
+						} else if (res.code == 2) {
+							layer.msg(res.msg + ',即将跳转登录界面');
+							var tmid = window.setTimeout(function () {
+								top.location.href = 'login.html'
+								window.clearTimeout(tmid);
+							}, 1500);
+
+						} else {
+							layer.msg('请求失败');
+						}
+					},
+					error: function (err) {},
+					complete: function (XMLHttpRequest, status) { //请求完成后最终执行参数　
+					}
+				});
+
+			};
+			
+			/**
+			 * 推送理赔人员方法
+			 * */
+
+			function fun_push_lp_data(ID, _url) {
+				$.ajax({
+					type: "POST",
+					timeout: 10000, // 超时时间 10 秒
+					async: false,
+					headers: {
+						'authorization': sessionToken.access_token
+						// 'authorization': 'eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiI2IiwiQVVUSE9SSVRJRVNfS0VZIjoiNiIsImV4cCI6MTUzNjgyMTg4OX0.RDU5XY7M1jvm46IDY3kSSRUCB9pNpColeUXnr_MROsxAbC7oGWpzmKEJx4H8Vf1hjMSDgTWQWdqn7dv3h9TNzw'
+					},
+					url: _url,
+					data: {
+						'id': ID
+					},
+					success: function (res) {
+						// res = JSON.parse(res);
+						//检查返回的标志
+						if (res.code == 1) {
+							layer.msg(res.msg);
+						} else if (res.code == 2) {
+							layer.msg(res.msg + ',即将跳转登录界面');
+							var tmid = window.setTimeout(function () {
+								top.location.href = 'login.html'
+								window.clearTimeout(tmid);
+							}, 1500);
+
+						} else {
+							layer.msg(res.msg);
+						}
+					},
+					error: function (err) {},
+					complete: function (XMLHttpRequest, status) { //请求完成后最终执行参数　
+					}
+				});
+
+			};
+		});
+	</script>
+</body>
+
+</html>

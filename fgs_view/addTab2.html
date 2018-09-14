@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>Table</title>
+    <link rel="stylesheet" href="../plugins/layui2/css/layui.css" media="all" />
+    <!-- <link rel="stylesheet" href="css/global.css" media="all">
+    <link rel="stylesheet" href="plugins/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="css/table.css" /> -->
+    <style>
+        .mod-header {
+            background: #FFF;
+            /* padding: 2px 20px; */
+            border-bottom: 1px solid #35afee;
+            width: 100%;
+            position: fixed;
+            top: 1px;
+            left: 0px;
+            z-index: 9999;
+            height: 45px;
+        }
+
+        .mod-header .title {
+            font-size: 28px;
+            color: #35afee;
+            font-weight: bold;
+            margin-left: 20px;
+            line-height: 45px;
+        }
+    </style>
+</head>
+
+
+<body>
+    <div class="layui-container" id="view" style="margin-top:55px">
+        <!-- <script id="detail" type="text/html"> -->
+        <!--行一-->
+        <form class="layui-form" action="">
+            <div class="mod-header">
+                <!-- <img src="../../img/icon_business/借款.png" /> -->
+                <span class="title">信息录入</span>
+                <button class="layui-btn  layui-btn-radius layui-btn-primary" lay-submit lay-filter="Fg_info_edit" style="margin-right:20px;margin-top:3px; color: #fff; float: right; background: #1296db">
+                <i class="layui-icon">&#x1005;</i>
+                确定
+            </button>
+            </div>
+
+            <div class="layui-row" style="margin-top:5px">
+                <div class="layui-col-md6">
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">序号:</label>
+                        <div class="layui-input-block">
+                            <input type="text" name="number" autocomplete="off" placeholder="请输入序号" required lay-verify="required" class="layui-input">
+                        </div>
+                    </div>
+                </div>
+                <div class="layui-col-md6">
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">区县名称:</label>
+                        <div class="layui-input-block">
+                            <input type="text" name="outOrganization" autocomplete="off" placeholder="请输入区县名称" required lay-verify="required" class="layui-input">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--行二-->
+            <div class="layui-row">
+                <div class="layui-col-md6">
+                    <div class="layui-form-item">
+                        <label class="layui-form-label"><span style="font-size:12.5px">服务保险公司</span></label>
+                        <div class="layui-input-block">
+                            <input type="text" name="corporationName" autocomplete="off" placeholder="请输入服务保险公司" required lay-verify="required" class="layui-input">
+                        </div>
+                    </div>
+                </div>
+                <div class="layui-col-md6">
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">所属险种:</label>
+                        <div class="layui-input-block">
+                            <input type="text" name="insuranceType" autocomplete="off" placeholder="请输入所属险种" required lay-verify="required" class="layui-input">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--行三-->
+            <div class="layui-row">
+                <div class="layui-col-md6">
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">出险人:</label>
+                        <div class="layui-input-block">
+                            <input type="text" name="outDanger" autocomplete="off" placeholder="请输入出险人" required lay-verify="required" class="layui-input">
+                        </div>
+                    </div>
+                </div>
+                <div class="layui-col-md6">
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">出险原因:</label>
+                        <div class="layui-input-block">
+                            <input type="text" name="outCause" autocomplete="off" placeholder="请输入出险原因" required lay-verify="required" class="layui-input">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--行四-->
+            <div class="layui-row">
+                <div class="layui-col-md6">
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">出险日期:</label>
+                        <div class="layui-input-block">
+                            <input type="text" name="outDate" autocomplete="off" placeholder="请选择出险日期" required lay-verify="required" class="layui-input showTime">
+                            <!-- <input type="text" name="outDate" autocomplete="off" placeholder="请输入赔案号" required lay-verify="required" class="layui-input"> -->
+                        </div>
+                    </div>
+                </div>
+                <div class="layui-col-md6">
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">报案日期:</label>
+                        <div class="layui-input-block">
+                            <input type="text" name="reportDate" autocomplete="off" placeholder="请选择报案日期" required lay-verify="required" class="layui-input showTime">
+                            <!-- <input type="text" name="reportDate" autocomplete="off" placeholder="请输入赔案类型" required lay-verify="required" class="layui-input"> -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--行五-->
+            <div class="layui-row">
+                <div class="layui-col-md6">
+                    <div class="layui-form-item">
+                        <label class="layui-form-label"><span style="font-size:12px;margin-left:-15px">出险人联系方式</span></label>
+                        <div class="layui-input-block">
+                            <input type="text" name="outManTel" autocomplete="off" placeholder="请输入出险人联系方式" required lay-verify="required" class="layui-input">
+                        </div>
+                    </div>
+                </div>
+                <div class="layui-col-md6">
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">赔付进度:</label>
+                        <div class="layui-input-block">
+                            <input type="text" name="compensateStatus" autocomplete="off" placeholder="请输入赔付进度" required lay-verify="required" class="layui-input">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--行六-->
+            <div class="layui-row">
+                <div class="layui-col-md6">
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">报案号:</label>
+                        <div class="layui-input-block">
+                            <input type="text" name="reportNumber" autocomplete="off" placeholder="请输入报案号" required lay-verify="required" class="layui-input">
+                        </div>
+                    </div>
+                </div>
+                <div class="layui-col-md6">
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">估损金额:</label>
+                        <div class="layui-input-block">
+                            <input type="text" name="budgetMoney" autocomplete="off" placeholder="请输入估损金额" required lay-verify="required" class="layui-input">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--行7-->
+            <div class="layui-row">
+                <div class="layui-col-md6">
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">赔付金额:</label>
+                        <div class="layui-input-block">
+                            <input type="text" name="compensateMoney" autocomplete="off" placeholder="请输入赔付金额" required lay-verify="required" class="layui-input">
+                        </div>
+                    </div>
+                </div>
+                <div class="layui-col-md6">
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">赔付日期:</label>
+                        <div class="layui-input-block">
+                            <input type="text" name="compensateDate" autocomplete="off" placeholder="请选择赔付日期" required lay-verify="required" class="layui-input showTime">
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--行8-->
+            <div class="layui-row">
+                <div class="layui-col-md6">
+                    <div class="layui-form-item">
+                        <label class="layui-form-label"><span style="font-size:12px;margin-left:-15px">服务人联系方式</span></label>
+                        <div class="layui-input-block">
+                            <input type="text" name="serviceSupplierTel" autocomplete="off" placeholder="请输入服务人联系方式" required lay-verify="required" class="layui-input">
+                        </div>
+                    </div>
+                </div>
+                <div class="layui-col-md6">
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">备注:</label>
+                        <div class="layui-input-block">
+                            <textarea name="remark" placeholder="请输入备注" class="layui-textarea" required lay-verify="required"></textarea>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</body>
+<script type="text/javascript" src="../plugins/layui2/layui.js"></script>
+<script type="text/javascript" src="../js/tool.js"></script>
+<script>
+    layui.use(['form', 'layedit', 'laydate', 'element', 'jquery', 'upload', 'laytpl'], function () {
+        var upload = layui.upload;
+        var form = layui.form,
+            layer = layui.layer,
+            layedit = layui.layedit,
+            element = layui.element,
+            laydate = layui.laydate,
+            laytpl = layui.laytpl
+        $ = layui.jquery;
+        var index = parent.layer.getFrameIndex(window.name);
+        //1.总公司 2.分公司 3.民政局
+        var mark = objTool.getUrlParam('mark');
+        // //该条数据的id
+        // var id = objTool.getUrlParam('id');
+        //获取token,关闭页面失效
+        var sessionToken = layui.sessionData('token');
+        //分公司url地址\参数\请求参数
+        //单条数据新增提交url
+        var _urlAddDataOne = objTool.url + 'filiale/updateAccountBookTwo';
+        if (mark == 1) {
+
+        } else if (mark == 2) {
+            //加载日期选择器
+            $('.showTime').each(function () {
+                laydate.render({
+                    elem: this, //使用this指向当前元素
+                    position: 'abolute'
+                });
+            });
+
+        } else if (mark == 3) {}
+
+        //监听提交按钮
+        form.on('submit(Fg_info_edit)', function (data) {
+            data = data.field;
+            // console.log(JSON.stringify(data));
+            Fun_Ajax_info_edit(_urlAddDataOne, data, "POST");
+        });
+        /*
+         *编辑数据提交
+         **/
+        function Fun_Ajax_info_edit(_url, _data, type) {
+            $.ajax({
+                type: type,
+                timeout: 20000, // 超时时间 10 秒
+                async: false,
+                //防止深度序列化
+                // traditional: true,
+                headers: {
+                    'authorization': sessionToken.access_token
+                    // 'authorization': 'eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiI2IiwiQVVUSE9SSVRJRVNfS0VZIjoiNiIsImV4cCI6MTUzNjczNDQ4NH0.m7cQGa-xinxjEefiV5-l5bIJLYQdcFSYii3S-aan6okhxv8qwwlZpKCsQgKedKNttRAtrOP4xnb_X3_F1HdJgw'
+                },
+                url: _url,
+                data: _data,
+                // async: false,
+                success: function (res) {
+                    // res = JSON.parse(res);
+                    //检查返回的标志
+                    if (res.code == 1) {
+                        // debugger;
+                        layer.msg(res.msg);
+                        window.parent.Active.Fun_Ajax_Table_Data2(
+                            objTool.url + 'filiale/AccountBookTwoList', null);
+                        parent.layer.close(index);
+
+                    } else if (res.code == 2) {
+                        layer.msg(res.msg + ',即将跳转登录界面');
+                        var tmid = window.setTimeout(function () {
+                            top.location.href = 'login.html'
+                            window.clearTimeout(tmid);
+                        }, 1500);
+                    } else {
+                        layer.msg('请求失败');
+                        // parent.layer.close(index);
+                        return
+                    }
+                },
+                error: function (err) {
+                    console.log(err);
+                }
+            })
+        }
+
+    });
+</script>
+
+</html>

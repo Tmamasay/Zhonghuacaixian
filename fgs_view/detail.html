@@ -1,0 +1,480 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>Table</title>
+    <link rel="stylesheet" href="../plugins/layui2/css/layui.css" media="all" />
+    <!-- <link rel="stylesheet" href="css/global.css" media="all">
+    <link rel="stylesheet" href="plugins/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="css/table.css" /> -->
+</head>
+
+<body>
+    <div class="layui-container" id="view" style="margin-top:20px"></div>
+    <script id="detail" type="text/html">
+        <!--行一-->
+        <div class="layui-row">
+            <div class="layui-col-md6">
+                <div class="layui-form-item">
+                    <label class="layui-form-label">行号:</label>
+                    <div class="layui-input-block">
+                        <input type="text" name="lineNum" value={{data.lineNum}} autocomplete="off" readonly="true" class="layui-input">
+                    </div>
+                </div>
+            </div>
+            <div class="layui-col-md6">
+                <div class="layui-form-item">
+                    <label class="layui-form-label">承保机构:</label>
+                    <div class="layui-input-block">
+                        <input type="text" name="organization" value={{data.organization}} autocomplete="off" readonly="true" class="layui-input">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--行二-->
+        <div class="layui-row">
+            <div class="layui-col-md6">
+                <div class="layui-form-item">
+                    <label class="layui-form-label">险种信息:</label>
+                    <div class="layui-input-block">
+                        <input type="text" name="insuranceTypeInfo" value={{data.insuranceTypeInfo}} autocomplete="off" readonly="true" class="layui-input">
+                    </div>
+                </div>
+            </div>
+            <div class="layui-col-md6">
+                <div class="layui-form-item">
+                    <label class="layui-form-label">责任信息:</label>
+                    <div class="layui-input-block">
+                        <input type="text" name="duty" value={{data.duty}} autocomplete="off" readonly="true" class="layui-input">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--行三-->
+        <div class="layui-row">
+            <div class="layui-col-md6">
+                <div class="layui-form-item">
+                    <label class="layui-form-label">保单号:</label>
+                    <div class="layui-input-block">
+                        <input type="text" value={{data.warrantyNum}} name="warrantyNum" autocomplete="off" readonly="true" class="layui-input">
+                    </div>
+                </div>
+            </div>
+            <div class="layui-col-md6">
+                <div class="layui-form-item">
+                    <label class="layui-form-label">报案号:</label>
+                    <div class="layui-input-block">
+                        <input type="text" value={{data.reportNumber}} name="reportNumber" autocomplete="off" readonly="true" class="layui-input">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--行四-->
+        <div class="layui-row">
+            <div class="layui-col-md6">
+                <div class="layui-form-item">
+                    <label class="layui-form-label">赔案号:</label>
+                    <div class="layui-input-block">
+                        <input type="text" value={{data.compensateNumber}} name="compensateNumber" autocomplete="off" readonly="true" class="layui-input">
+                    </div>
+                </div>
+            </div>
+            <div class="layui-col-md6">
+                <div class="layui-form-item">
+                    <label class="layui-form-label">赔案类型:</label>
+                    <div class="layui-input-block">
+                        <input type="text" value={{data.compensateType}} name="compensateType" autocomplete="off" readonly="true" class="layui-input">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--行五-->
+        <div class="layui-row">
+            <div class="layui-col-md6">
+                <div class="layui-form-item">
+                    <label class="layui-form-label">赔案状态:</label>
+                    <div class="layui-input-block">
+                        <input type="text" value={{data.compensateStatus}} name="compensateStatus" autocomplete="off" readonly="true" class="layui-input">
+                    </div>
+                </div>
+            </div>
+            <div class="layui-col-md6">
+                <div class="layui-form-item">
+                    <label class="layui-form-label">案件类型:</label>
+                    <div class="layui-input-block">
+                        <input type="text" value={{data.caseType}} name="caseType" autocomplete="off" readonly="true" class="layui-input">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--行六-->
+        <div class="layui-row">
+            <div class="layui-col-md6">
+                <div class="layui-form-item">
+                    <label class="layui-form-label">投保单位:</label>
+                    <div class="layui-input-block">
+                        <input type="text" value={{data.insureCorporation}} name="insureCorporation" autocomplete="off" readonly="true" class="layui-input">
+                    </div>
+                </div>
+            </div>
+            <div class="layui-col-md6">
+                <div class="layui-form-item">
+                    <label class="layui-form-label">被保险人:</label>
+                    <div class="layui-input-block">
+                        <input type="text" value={{data.theInsured}} name="theInsured" autocomplete="off" readonly="true" class="layui-input">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--行7-->
+        <div class="layui-row">
+            <div class="layui-col-md6">
+                <div class="layui-form-item">
+                    <label class="layui-form-label">证件类型:</label>
+                    <div class="layui-input-block">
+                        <input type="text" value={{data.theInsuredPapersType}} name="theInsuredPapersType" autocomplete="off" readonly="true" class="layui-input">
+                    </div>
+                </div>
+            </div>
+            <div class="layui-col-md6">
+                <div class="layui-form-item">
+                    <label class="layui-form-label">证件号码:</label>
+                    <div class="layui-input-block">
+                        <input type="text" value={{data.theInsuredPapersNum}} name="theInsuredPapersNum" autocomplete="off" readonly="true" class="layui-input">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--行8-->
+        <div class="layui-row">
+            <div class="layui-col-md6">
+                <div class="layui-form-item">
+                    <label class="layui-form-label">治疗机构:</label>
+                    <div class="layui-input-block">
+                        <input type="text" value={{data.cureOrganization}} name="cureOrganization" autocomplete="off" readonly="true" class="layui-input">
+                    </div>
+                </div>
+            </div>
+            <div class="layui-col-md6">
+                <div class="layui-form-item">
+                    <label class="layui-form-label">报案日期:</label>
+                    <div class="layui-input-block">
+                        <input type="text" value={{data.reportDate}} name="reportDate" autocomplete="off" readonly="true" class="layui-input">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--行9-->
+        <div class="layui-row">
+            <div class="layui-col-md6">
+                <div class="layui-form-item">
+                    <label class="layui-form-label">入院时间:</label>
+                    <div class="layui-input-block">
+                        <input type="text" name="hospitalizedStartDate" value={{data.hospitalizedStartDate}} autocomplete="off" readonly="true" class="layui-input">
+                    </div>
+                </div>
+            </div>
+            <!-- <div class="layui-col-md6">
+                <div class="layui-form-item">
+                    <label class="layui-form-label">报案日期:</label>
+                    <div class="layui-input-block">
+                        <input type="text" value={{data.reportDate}} name="reportDate" autocomplete="off" readonly="true" class="layui-input">
+                    </div>
+                </div>
+            </div> -->
+            <div class="layui-col-md6">
+                <div class="layui-form-item">
+                    <label class="layui-form-label">出院时间:</label>
+                    <div class="layui-input-block">
+                        <input type="text" name="hospitalizedEndDate" value="{{data.hospitalizedEndDate}}" autocomplete="off" readonly="true" class="layui-input">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--行10-->
+        <div class="layui-row">
+            <div class="layui-col-md6">
+                <div class="layui-form-item">
+                    <label class="layui-form-label">结算时间:</label>
+                    <div class="layui-input-block">
+                        <input type="text" value={{data.clearingDate}} name="clearingDate" autocomplete="off" readonly="true" class="layui-input">
+                    </div>
+                </div>
+            </div>
+            <div class="layui-col-md6">
+                <div class="layui-form-item">
+                    <label class="layui-form-label">出院原因:</label>
+                    <div class="layui-input-block">
+                        <input type="text" value={{data.hospitalizedOutCause}} name="hospitalizedOutCause" autocomplete="off" readonly="true" class="layui-input">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--行11-->
+        <div class="layui-row">
+            <div class="layui-col-md6">
+                <div class="layui-form-item">
+                    <label class="layui-form-label">总医疗费:</label>
+                    <div class="layui-input-block">
+                        <input type="text" value={{data.totalMedicalFee}} name="totalMedicalFee" autocomplete="off" readonly="true" class="layui-input">
+                    </div>
+                </div>
+            </div>
+            <div class="layui-col-md6">
+                <div class="layui-form-item">
+                    <label class="layui-form-label"><span style="font-size:12.5px">医保报销金额</span>:</label>
+                    <div class="layui-input-block">
+                        <input type="text" value={{data.compensateMoney}} name="compensateMoney" autocomplete="off" readonly="true" class="layui-input">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--行12-->
+        <div class="layui-row">
+            <div class="layui-col-md6">
+                <div class="layui-form-item">
+                    <label class="layui-form-label"><span style="font-size:12.5px">个人自费费用</span>:</label>
+                    <div class="layui-input-block">
+                        <input type="text" value={{data.selfPayingMoney}} name="selfPayingMoney" autocomplete="off" readonly="true" class="layui-input">
+                    </div>
+                </div>
+            </div>
+            <div class="layui-col-md6">
+                <div class="layui-form-item">
+                    <label class="layui-form-label"><span style="font-size:12.5px">大病理赔金额</span>:</label>
+                    <div class="layui-input-block">
+                        <input type="text" value={{data.bigIllnessCompensateMoney}} name="bigIllnessCompensateMoney" autocomplete="off" readonly="true"
+                            class="layui-input">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--行13-->
+        <div class="layui-row">
+            <div class="layui-col-md6">
+                <div class="layui-form-item">
+                    <label class="layui-form-label"><span style="font-size:12.5px">实际赔付金额</span>:</label>
+                    <div class="layui-input-block">
+                        <input type="text" value={{data.realityCompensateMoney}} name="realityCompensateMoney" autocomplete="off" readonly="true"
+                            class="layui-input">
+                    </div>
+                </div>
+            </div>
+            <div class="layui-col-md6">
+                <div class="layui-form-item">
+                    <label class="layui-form-label">核赔时间:</label>
+                    <div class="layui-input-block">
+                        <input type="text" value={{data.filialeAuditDate}} name="filialeAuditDate" autocomplete="off" readonly="true" class="layui-input">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--行14-->
+        <div class="layui-row">
+            <div class="layui-col-md6">
+                <div class="layui-form-item">
+                    <label class="layui-form-label">流程标识:</label>
+                    <div class="layui-input-block">
+                        <input type="text" value={{data.flowSign}} name="flowSign" autocomplete="off" readonly="true" class="layui-input">
+                    </div>
+                </div>
+            </div>
+            <div class="layui-col-md6">
+                <div class="layui-form-item">
+                    <label class="layui-form-label">有效状态:</label>
+                    <div class="layui-input-block">
+                        <input type="text" value="{{data.validStatus}}" name="validStatus" autocomplete="off" readonly="true" class="layui-input">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--行15-->
+        <div class="layui-row">
+            <div class="layui-col-md6">
+                <div class="layui-form-item">
+                    <label class="layui-form-label">巡查状态:</label>
+                    <div class="layui-input-block">
+                        <input type="text" value="{{data.patrolStatus}}" name="patrolStatus" autocomplete="off" readonly="true" class="layui-input">
+                    </div>
+                </div>
+            </div>
+            <div class="layui-col-md6">
+                <div class="layui-form-item">
+                    <label class="layui-form-label">巡查结果:</label>
+                    <div class="layui-input-block">
+                        <input type="text" value="{{data.patrolResult}}" name="patrolResult" autocomplete="off" readonly="true" class="layui-input">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--行16-->
+        <div class="layui-row">
+            <div class="layui-col-md6">
+                <div class="layui-form-item">
+                    <label class="layui-form-label">巡查人:</label>
+                    <div class="layui-input-block">
+                        <input type="text" value="{{data.patrolman}}" name="patrolman" autocomplete="off" readonly="true" class="layui-input">
+                    </div>
+                </div>
+            </div>
+            <div class="layui-col-md6">
+                <div class="layui-form-item">
+                    <label class="layui-form-label">巡查审核人:</label>
+                    <div class="layui-input-block">
+                        <input type="text" value="{{data.patrolAuditor}}" name="patrolAuditor" autocomplete="off" readonly="true" class="layui-input">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--行17-->
+        <div class="layui-row">
+            <div class="layui-col-md6">
+                <div class="layui-form-item">
+                    <label class="layui-form-label">稽核状态:</label>
+                    <div class="layui-input-block">
+                        <input type="text" value="{{data.auditStatus}}" name="auditStatus" autocomplete="off" readonly="true" class="layui-input">
+                    </div>
+                </div>
+            </div>
+            <div class="layui-col-md6">
+                <div class="layui-form-item">
+                    <label class="layui-form-label">稽核人:</label>
+                    <div class="layui-input-block">
+                        <input type="text" value="{{data.audit}}" name="audit" autocomplete="off" readonly="true" class="layui-input">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--行18-->
+        <div class="layui-row">
+            <div class="layui-col-md6">
+                <div class="layui-form-item">
+                    <label class="layui-form-label">是否追偿:</label>
+                    <div class="layui-input-block">
+                        <input type="text" value="{{data.isRecourse}}" name="isRecourse" autocomplete="off" readonly="true" class="layui-input">
+                    </div>
+                </div>
+            </div>
+            <div class="layui-col-md6">
+                <div class="layui-form-item">
+                    <label class="layui-form-label">撤销标记:</label>
+                    <div class="layui-input-block">
+                        <input type="text" value="{{data.revocationSign}}" name="revocationSign" autocomplete="off" readonly="true" class="layui-input">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--行19-->
+        <div class="layui-row">
+            <div class="layui-col-md6">
+                <div class="layui-form-item">
+                    <label class="layui-form-label">撤销赔案号:</label>
+                    <div class="layui-input-block">
+                        <input type="text" value="{{data.revocationCompensateNumber}}" name="revocationCompensateNumber" autocomplete="off" readonly="true"
+                            readonly="true" class="layui-input">
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+    </script>
+
+
+    <!-- <script type="text/javascript" src="plugins/layui2/layui.js"></script> -->
+
+
+</body>
+<script type="text/javascript" src="../plugins/layui2/layui.js"></script>
+<script type="text/javascript" src="../js/tool.js"></script>
+<script>
+    layui.use(['form', 'layedit', 'laydate', 'element', 'jquery', 'upload', 'laytpl'], function () {
+        var upload = layui.upload;
+        var form = layui.form,
+            layer = layui.layer,
+            layedit = layui.layedit,
+            element = layui.element,
+            laydate = layui.laydate,
+            laytpl = layui.laytpl
+        $ = layui.jquery;
+        //1.总公司 2.分公司 3.民政局
+        var mark = objTool.getUrlParam('mark');
+        //该条数据的id
+        var id = objTool.getUrlParam('id');
+        //获取token,关闭页面失效
+        var sessionToken = layui.sessionData('token');
+        var index = parent.layer.getFrameIndex(window.name);
+        //分公司url地址\参数\请求参数
+        // var _url2 = 'http://192.168.0.229:8081/filiale/AccountBookOneList';
+        var _url2 = objTool.url + 'filiale/AccountBookOneList';
+
+        var data2 = {
+            id: id,
+            page: 1,
+            size: 1
+        }
+        var resData2;
+        if (mark == 1) {
+
+        } else if (mark == 2) {
+            resData2 = Fun_Ajax_Data_Origin(_url2, data2, "post");
+            data = resData2.data[0]
+            // console.log(data);
+            var getTpl = detail.innerHTML,
+                view = document.getElementById('view');
+            laytpl(getTpl).render(data, function (html) {
+                view.innerHTML = html;
+            });
+
+        } else if (mark == 3) {}
+
+        /**
+         * 封装ajax,获取数据
+         * */
+        function Fun_Ajax_Data_Origin(_url, _data, type) {
+            var dataObject = {};
+            $.ajax({
+                type: type,
+                timeout: 10000, // 超时时间 10 秒
+                headers: {
+                    'authorization': sessionToken.access_token
+                    // 'authorization': 'eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiI2IiwiQVVUSE9SSVRJRVNfS0VZIjoiNiIsImV4cCI6MTUzNjczNDQ4NH0.m7cQGa-xinxjEefiV5-l5bIJLYQdcFSYii3S-aan6okhxv8qwwlZpKCsQgKedKNttRAtrOP4xnb_X3_F1HdJgw'
+                },
+                url: _url,
+                data: _data,
+                async: false,
+                success: function (res) {
+                    console.log(res);
+                    // res = JSON.parse(res);
+                    //检查返回的标志
+                    if (res.code == 1) {
+                        dataObject.code = "0";
+                        dataObject.msg = "";
+                        dataObject.count = res.data.totalElements;
+                        dataObject.data = res.data.content;
+                        // debugger;
+
+                    } else if (res.code == 2) {
+                        layer.msg(res.msg + ',即将跳转登录界面');
+                        var tmid = window.setTimeout(function () {
+                            top.location.href = 'login.html'
+                            window.clearTimeout(tmid);
+                        }, 1500);
+
+                    } else {
+                        layer.msg('请求失败');
+                        // parent.layer.close(index);
+                    }
+                },
+                error: function (err) {},
+                complete: function (XMLHttpRequest, status) { //请求完成后最终执行参数　
+                }
+            })
+            return dataObject;
+        }
+
+    });
+</script>
+
+</html>

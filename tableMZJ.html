@@ -1,0 +1,1197 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="UTF-8">
+	<title>Table</title>
+	<link rel="stylesheet" href="plugins/layui2/css/layui.css" media="all" />
+	<link rel="stylesheet" href="css/global.css" media="all">
+	<link rel="stylesheet" href="plugins/font-awesome/css/font-awesome.min.css">
+	<link rel="stylesheet" href="css/table.css" />
+</head>
+
+<body>
+	<div class="admin-main">
+		<div class="layui-tab " lay-filter="fen_tab">
+			<ul class="layui-tab-title">
+				<li class="layui-this">医疗救助系统数据</li>
+				<li>参保人员数据</li>
+				<li>本地医疗救助系统数据</li>
+				<li>本地参保人员数据</li>
+
+			</ul>
+			<div class="layui-tab-content">
+				<div class="layui-tab-item layui-show">
+					<blockquote class="layui-elem-quote" style="padding:4px;height:50px">
+						<form class="layui-form" action="">
+							<div class="layui-row" style="margin-top:7px">
+								<div class="layui-col-md4" style="margin-left:-60px">
+									<div class="layui-form-item">
+										<!-- <label class="layui-form-label">选择框</label> -->
+										<div class="layui-input-block">
+											<select name="underwrite_company" class="bxgs" lay-verify="required">
+												<!-- <option value="">请选择</option> -->
+												<option value="人保">人保</option>
+												<option value="安城">安城</option>
+												<option value="国寿">国寿</option>
+												<option value="大地">大地</option>
+												<option value="中华">中华</option>
+											</select>
+										</div>
+									</div>
+								</div>
+								<div class="layui-col-md4" style="margin-left:-80px">
+									<div class="layui-form-item">
+										<!-- <label class="layui-form-label">输入框</label> -->
+										<div class="layui-input-block">
+											<input type="text" name="time" required lay-verify="required" placeholder="请选择时间" autocomplete="off" class="layui-input showTime timeJZ">
+										</div>
+									</div>
+								</div>
+								<div class="layui-col-md4" style="margin-left:15px">
+									<!-- <a href="javascript:;" class="layui-btn layui-btn-small" id="search2">
+										<i class="layui-icon">&#xe615;</i> 搜索
+									</a> -->
+									<a href="javascript:;" class="layui-btn layui-btn-small" lay-submit lay-filter="JZ_fresh" id="JZ_fresh">
+										<i class="layui-icon">&#xe608;</i>更新数据
+									</a>
+								</div>
+							</div>
+						</form>
+						<div style="width: 100%; margin: auto;">
+							<table class="layui-table" id="JZ_table" lay-filter="JZ_table">
+							</table>
+						</div>
+				</div>
+				<div class="layui-tab-item">
+					<blockquote class="layui-elem-quote" style="padding:4px;height:50px">
+						<form class="layui-form" action="">
+							<div class="layui-row" style="margin-top:7px">
+								<div class="layui-col-md3" style="margin-left:-15px">
+									<div class="layui-form-item">
+										<label class="layui-form-label"><span style="font-size:12px">保险公司:</span></label>
+										<div class="layui-input-block">
+											<select name="underwriteCompany" class="bxgs_cb" lay-verify="required">
+												<!-- <option value="">请选择</option> -->
+												<option value="人保">人保</option>
+												<option value="安城">安城</option>
+												<option value="国寿">国寿</option>
+												<option value="大地">大地</option>
+												<option value="中华">中华</option>
+											</select>
+										</div>
+									</div>
+								</div>
+								<div class="layui-col-md4" style="margin-left:-15px">
+									<div class="layui-form-item">
+										<label class="layui-form-label"><span style="font-size:12px">开始投保时间:</span></label>
+										<div class="layui-input-block">
+											<input type="text" name="startDate" required lay-verify="required" placeholder="请选择时间" autocomplete="off" class="layui-input startTime">
+										</div>
+									</div>
+								</div>
+								<div class="layui-col-md4" style="margin-left:-15px">
+									<div class="layui-form-item">
+										<label class="layui-form-label"><span style="font-size:12px">结束投保时间:</span></label>
+										<div class="layui-input-block">
+											<input type="text" name="endDate" required lay-verify="required" placeholder="请选择时间" autocomplete="off" class="layui-input endTime">
+										</div>
+									</div>
+								</div>
+								<div class="layui-col-md1" style="margin-left:15px">
+									<a href="javascript:;" class="layui-btn layui-btn-small" lay-submit lay-filter="CB_fresh" id="CB_fresh">
+										<i class="layui-icon">&#xe608;</i>更新数据</a>
+								</div>
+							</div>
+						</form>
+
+
+					</blockquote>
+					<div style="width: 100%; margin: auto;">
+						<table class="layui-table" id="CB_table" lay-filter="CB_table">
+						</table>
+					</div>
+				</div>
+				<div class="layui-tab-item">
+					<blockquote class="layui-elem-quote" style="padding:4px;height:50px">
+						<form class="layui-form" action="">
+							<div class="layui-row" style="margin-top:7px">
+								<div class="layui-col-md4" style="margin-left:-30px">
+									<div class="layui-form-item">
+										<label class="layui-form-label">保险公司:</label>
+										<div class="layui-input-block">
+											<select name="underwrite_company" class="bxgs_local" lay-verify="required">
+												<!-- <option value="">请选择</option> -->
+												<option value="人保">人保</option>
+												<option value="安城">安城</option>
+												<option value="国寿">国寿</option>
+												<option value="大地">大地</option>
+												<option value="中华">中华</option>
+											</select>
+										</div>
+									</div>
+								</div>
+								<div class="layui-col-md4" style="margin-left:15px">
+									<!-- <a href="javascript:;" class="layui-btn layui-btn-small" id="search2">
+										<i class="layui-icon">&#xe615;</i> 搜索
+									</a> -->
+									<a href="javascript:;" class="layui-btn layui-btn-small" lay-submit lay-filter="JZ_local_fresh" id="JZ_local_fresh">
+					                   <i class="layui-icon">&#xe608;</i>更新数据	</a>
+								</div>
+							</div>
+						</form>
+					</blockquote>
+					<div style="width: 100%; margin: auto;">
+						<table class="layui-table" id="JZ_local_table" lay-filter="JZ_local_table">
+						</table>
+					</div>
+				</div>
+				<div class="layui-tab-item">
+					<blockquote class="layui-elem-quote">
+						<a href="javascript:;" class="layui-btn layui-btn-small" id="CB_local_fresh">
+							<i class="layui-icon">&#xe608;</i>更新数据
+						</a>
+						<a href="javascript:;" class="layui-btn layui-btn-small" id="import2">
+							<i class="layui-icon">&#xe608;</i>导入
+						</a>
+						<a href="javascript:;" class="layui-btn layui-btn-small" id="delect_items2">
+							<i class="fa fa-shopping-cart" aria-hidden="true"></i> 批量删除
+						</a>
+						<a href="javascript:;" class="layui-btn layui-btn-small" id="add_CB_Data">
+							<i class="layui-icon">&#xe608;</i> 推送参保人员数据
+						</a>
+					</blockquote>
+					<div style="width: 100%; margin: auto;">
+						<table class="layui-table" id="CB_local_table" lay-filter="CB_local_table">
+						</table>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<script type="text/javascript" src="plugins/layui2/layui.js"></script>
+	<script type="text/javascript" src="./js/tool.js"></script>
+	<script type="text/html" id="barDemo">
+		<div class="layui-btn-group demoTable">
+			<a class="layui-btn layui-btn-normal layui-btn-xs" lay-event="detail">详情</a>
+			 <!--<a class="layui-btn layui-btn-xs layui-btn-normal" lay-event="edit">编辑</a>
+			<a class="layui-btn layui-btn-normal layui-btn-xs" lay-event="del">删除</a> -->
+		</div>
+	</script>
+	<script type="text/html" id="barDemo1">
+		<div class="layui-btn-group demoTable">
+			<a class="layui-btn layui-btn-normal layui-btn-xs" lay-event="detail1">详情</a>
+			 <a class="layui-btn layui-btn-xs layui-btn-normal" lay-event="edit1">编辑</a>
+			<a class="layui-btn layui-btn-normal layui-btn-xs" lay-event="del1">删除</a> 
+		</div>
+	</script>
+	<script>
+		layui.config({
+			base: 'plugins/layui2/modules/'
+		});
+		layui.use(['form', 'layedit', 'laydate', 'element', 'table', 'jquery', 'upload', 'laytpl'], function () {
+			var upload = layui.upload;
+			var form = layui.form,
+				layer = layui.layer,
+				layedit = layui.layedit,
+				element = layui.element,
+				laydate = layui.laydate,
+				$ = layui.jquery,
+				table = layui.table;
+			form.render('select');
+			//加载日期选择
+			$('.showTime').each(function () {
+				laydate.render({
+					elem: this, //使用this指向当前元素
+					position: 'abolute',
+					type: 'month',
+					value: '2018-08'
+				});
+			});
+			var tabMark = 0;
+			//获取token,关闭页面失效
+			var sessionToken = layui.sessionData('token');
+
+			//url
+			//医疗救助系统数据url地址
+			var _url_JZ = objTool.url + 'civilAffairsBureau/medicalAssistance?time=' + new Date().getTime();
+			//参保人员数据url地址
+			var _url_CB = objTool.url + 'civilAffairsBureau/insuranceMyList?time=' + new Date().getTime();
+			//本地医疗救助系统数据url地址
+			var _url_local_JZ = objTool.url + 'civilAffairsBureau/myMedicalAssistance?time=' + new Date().getTime();
+			//本地参保人员数据url地址
+			var _url_local_CB = objTool.url + 'civilAffairsBureau/getParticipation?time=' + new Date().getTime();
+			//民政局url地址\参数\请求参数
+			var tableIns,
+				tableIns1,
+				tableIns2,
+				tableIns3;
+			//定义到公用对象里，子层调用
+			Active = {
+				//封装ajax,获取医疗数据,刷新表格
+				Fun_Ajax_Table_Data: function (_url, _data) {
+					return table.render({
+						elem: '#JZ_table',
+						method: 'post',
+						url: _url,
+						height: 'full-190',
+						headers: {
+							'authorization': sessionToken.access_token
+							// 'authorization': 'eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiI2IiwiQVVUSE9SSVRJRVNfS0VZIjoiNiIsImV4cCI6MTUzNjgyMTg4OX0.RDU5XY7M1jvm46IDY3kSSRUCB9pNpColeUXnr_MROsxAbC7oGWpzmKEJx4H8Vf1hjMSDgTWQWdqn7dv3h9TNzw'
+						},
+						parseData: function (res) { //res 即为原始返回的数据
+							console.log(res)
+							return {
+								"code": res.code, //解析接口状态
+								"msg": res.msg, //解析提示文本
+								"totalElements": res.data.totalElements, //解析数据长度
+								"data": res.data.s89Q04 //解析数据列表
+							};
+							// debugger;
+						},
+						where: _data,
+						request: {
+							pageName: 'pagenum' //页码的参数名称，默认：page
+								,
+							limitName: 'pagesize' //每页数据量的参数名，默认：limit
+						},
+						response: {
+							statusName: 'code',
+							statusCode: 1,
+							msgName: 'msg',
+							countName: 'totalElements',
+
+						},
+						done: function (res) {
+							if (res.code == 2) {
+								layer.msg(res.msg + ',即将跳转登录界面');
+								var tmid = window.setTimeout(function () {
+									top.location.href = 'login.html'
+									window.clearTimeout(tmid);
+								}, 1500);
+
+							}
+							// layer.closeAll('loading');
+						},
+						text: {
+							none: '<p align="center" style="padding:50px 50px">无数据</p>'
+						},
+						cols: [
+							[{
+									type: 'checkbox',
+									fixed: 'left'
+								},
+								{
+									title: '序号',
+									width: 60,
+									event: 'event_detail',
+									type: 'numbers'
+								},
+								{
+									field: 'data_sources',
+									title: '数据来源',
+									width: 180
+								},
+								{
+									field: 'name',
+									title: '姓名',
+									width: 180
+								},
+								{
+									field: 'sex',
+									title: '性别',
+									width: 150,
+									// align: 'right',
+
+								},
+								{
+									field: 'id_card',
+									title: '身份证号码',
+									width: 150,
+
+								},
+								{
+									field: 'account_nature',
+									title: '户口性质',
+									width: 150,
+								},
+								{
+									field: 'insured_city',
+									title: '参保统筹区',
+									width: 150,
+								},
+								{
+									field: 'visit_city',
+									title: '就诊统筹区',
+									width: 205,
+								},
+								{
+									field: 'settlement_hospital',
+									title: '结算医疗机构名称',
+									width: 90,
+								},
+								{
+									field: 'visit_hospital',
+									title: '就诊医疗机构名称',
+									width: 180
+								},
+								{
+									field: 'medical_type',
+									title: '医疗类别',
+									width: 180
+								}, {
+									field: 'civil_reimbursement_type',
+									title: '民政报销类别',
+									width: 180
+								}, {
+									field: 'admission_date',
+									title: '入院日期',
+									width: 180
+								}, {
+									field: 'discharged_date',
+									title: '出院日期',
+									width: 180
+								}, {
+									field: 'disease_number',
+									title: '疾病编码',
+									width: 180
+								}, {
+									field: 'disease_name',
+									title: '疾病名称',
+									width: 180
+								}, {
+									field: 'settlement_date',
+									title: '结算时间',
+									width: 180
+								}, {
+									field: 'rescue_total_money',
+									title: '救助金额合计',
+									width: 180
+								}, {
+									field: 'county_name',
+									title: '区县名称',
+									width: 180
+								},
+								// {
+								// 	field: 'kh',
+								// 	title: '银行卡号',
+								// 	width: 280
+								// },
+								// //{ field: 'VC_ProjectZX', title: '项目名称', width: 190 },
+								{
+									title: '操作',
+									toolbar: '#barDemo',
+									align: 'center',
+									fixed: 'right',
+									width: 150
+								},
+							]
+						],
+						limit: 20,
+						page: {
+							limits: [10, 20, 30, 50, 100, 200, 300, 400, 500],
+							prev: '上一页',
+							next: '下一页',
+							layout: ['prev', 'page', 'next', 'limit', 'count', 'skip']
+						}
+						// size: 20,
+						// page: true
+					});
+
+				},
+				//封装ajax,获取参保数据,刷新表格
+				Fun_Ajax_Table_Data1: function (_url, _data) {
+					return table.render({
+						elem: '#CB_table',
+						method: 'post',
+						url: _url,
+						height: 'full-190',
+						headers: {
+							'authorization': sessionToken.access_token
+							// 'authorization': 'eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiI2IiwiQVVUSE9SSVRJRVNfS0VZIjoiNiIsImV4cCI6MTUzNjgyMTg4OX0.RDU5XY7M1jvm46IDY3kSSRUCB9pNpColeUXnr_MROsxAbC7oGWpzmKEJx4H8Vf1hjMSDgTWQWdqn7dv3h9TNzw'
+						},
+						parseData: function (res) { //res 即为原始返回的数据
+							return {
+								"code": res.code, //解析接口状态
+								"msg": res.msg, //解析提示文本
+								"totalElements": res.data.totalElements, //解析数据长度
+								"data": res.data.s89Q01 //解析数据列表
+							};
+							// debugger;
+						},
+						where: _data,
+						request: {
+							// pageName: 'page' //页码的参数名称，默认：page
+							// 	,
+							limitName: 'pageSize' //每页数据量的参数名，默认：limit
+						},
+						response: {
+							statusName: 'code',
+							statusCode: 1,
+							msgName: 'msg',
+							countName: 'totalElements',
+
+						},
+						done: function (res) {
+							if (res.code == 2) {
+								layer.msg(res.msg + ',即将跳转登录界面');
+								var tmid = window.setTimeout(function () {
+									top.location.href = 'login.html'
+									window.clearTimeout(tmid);
+								}, 1500);
+
+							}
+							// layer.closeAll('loading');
+						},
+						text: {
+							none: '<p align="center" style="padding:50px 50px">无数据</p>'
+						},
+						cols: [
+							[
+								// {
+								// 	type: 'checkbox',
+								// 	fixed: 'left'
+								// },
+								{
+									title: '序号',
+									width: 60,
+									event: 'event_detail',
+									type: 'numbers'
+								},
+								{
+									field: 'name',
+									title: '参保人员姓名',
+									width: 180
+								},
+								{
+									field: 'sex',
+									title: '性别',
+									width: 150,
+									// align: 'right',
+
+								},
+								{
+									field: 'idcard',
+									title: '身份证号码',
+									width: 150,
+
+								},
+								{
+									field: 'county_id',
+									title: '区县编号',
+									width: 150,
+								},
+								{
+									field: 'people_type',
+									title: '参保人员类别',
+									width: 150,
+								},
+								{
+									field: 'town_id',
+									title: '乡镇编号',
+									width: 205,
+								},
+								{
+									field: 'bank_card',
+									title: '银行卡号',
+									width: 90,
+								},
+								{
+									field: 'phone',
+									title: '电话号码',
+									width: 180
+								},
+								{
+									field: 'bank_name',
+									title: '开户行',
+									width: 180
+								}, {
+									field: 'account_holder',
+									title: '开户人',
+									width: 180
+								}, {
+									field: 'starting_time',
+									title: '应起保时间',
+									width: 180
+								}, {
+									field: 'replace_id_card',
+									title: '被替换人员身份证号码',
+									width: 180
+								}, {
+									field: 'pk_id',
+									title: '标识ID',
+									width: 180
+								}, {
+									field: 'replace_name',
+									title: '被替换人员姓名',
+									width: 180
+								}, {
+									field: 'county_name',
+									title: '区县名称',
+									width: 180
+								}, {
+									title: '操作',
+									toolbar: '#barDemo',
+									align: 'center',
+									fixed: 'right',
+									width: 150
+								}
+							]
+						],
+						limit: 20,
+						page: {
+							limits: [10, 20, 30, 50, 100, 200, 300, 400, 500],
+							prev: '上一页',
+							next: '下一页',
+							layout: ['prev', 'page', 'next', 'limit', 'count', 'skip']
+						}
+						// size: 20,
+						// page: true
+					});
+
+				},
+				//封装ajax,获取自己医疗数据,刷新表格
+				Fun_Ajax_Table_Data2: function (_url, _data) {
+					return table.render({
+						elem: '#JZ_local_table',
+						method: 'post',
+						url: _url,
+						height: 'full-190',
+						headers: {
+							'authorization': sessionToken.access_token
+							// 'authorization': 'eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiI2IiwiQVVUSE9SSVRJRVNfS0VZIjoiNiIsImV4cCI6MTUzNjgyMTg4OX0.RDU5XY7M1jvm46IDY3kSSRUCB9pNpColeUXnr_MROsxAbC7oGWpzmKEJx4H8Vf1hjMSDgTWQWdqn7dv3h9TNzw'
+						},
+						parseData: function (res) { //res 即为原始返回的数据
+							console.log(res)
+							return {
+								"code": res.code, //解析接口状态
+								"msg": res.msg, //解析提示文本
+								"totalElements": res.data.totalElements, //解析数据长度
+								"data": res.data.content //解析数据列表
+							};
+							// debugger;
+						},
+						where: _data,
+						request: {
+							pageName: 'pagenum' //页码的参数名称，默认：page
+								,
+							limitName: 'pagesize' //每页数据量的参数名，默认：limit
+						},
+						response: {
+							statusName: 'code',
+							statusCode: 1,
+							msgName: 'msg',
+							countName: 'totalElements',
+
+						},
+						done: function (res) {
+							if (res.code == 2) {
+								layer.msg(res.msg + ',即将跳转登录界面');
+								var tmid = window.setTimeout(function () {
+									top.location.href = 'login.html'
+									window.clearTimeout(tmid);
+								}, 1500);
+
+							}
+							// layer.closeAll('loading');
+						},
+						text: {
+							none: '<p align="center" style="padding:50px 50px">无数据</p>'
+						},
+						cols: [
+							[
+								// {
+								// 	type: 'checkbox',
+								// 	fixed: 'left'
+								// },
+								{
+									title: '序号',
+									width: 60,
+									event: 'event_detail',
+									type: 'numbers'
+								},
+								{
+									field: 'dataSources',
+									title: '数据来源',
+									width: 180
+								},
+								{
+									field: 'name',
+									title: '姓名',
+									width: 180
+								},
+								{
+									field: 'sex',
+									title: '性别',
+									width: 150,
+									// align: 'right',
+
+								},
+								{
+									field: 'idCard',
+									title: '身份证号码',
+									width: 150,
+
+								},
+								{
+									field: 'accountNature',
+									title: '户口性质',
+									width: 150,
+								},
+								{
+									field: 'insuredCity',
+									title: '参保统筹区',
+									width: 150,
+								},
+								{
+									field: 'visitCity',
+									title: '就诊统筹区',
+									width: 205,
+								},
+								{
+									field: 'settlementHospital',
+									title: '结算医疗机构名称',
+									width: 90,
+								},
+								{
+									field: 'visitHospital',
+									title: '就诊医疗机构名称',
+									width: 180
+								},
+								{
+									field: 'medicalType',
+									title: '医疗类别',
+									width: 180
+								}, {
+									field: 'civilReimbursementType',
+									title: '民政报销类别',
+									width: 180
+								}, {
+									field: 'admissionDate',
+									title: '入院日期',
+									width: 180
+								}, {
+									field: 'dischargedDate',
+									title: '出院日期',
+									width: 180
+								}, {
+									field: 'diseaseNumber',
+									title: '疾病编码',
+									width: 180
+								}, {
+									field: 'diseaseName',
+									title: '疾病名称',
+									width: 180
+								}, {
+									field: 'settlementDate',
+									title: '结算时间',
+									width: 180
+								}, {
+									field: 'rescueTotalMoney',
+									title: '救助金额合计',
+									width: 180
+								}, {
+									field: 'countyName',
+									title: '区县名称',
+									width: 180
+								},
+								// {
+								// 	field: 'kh',
+								// 	title: '银行卡号',
+								// 	width: 280
+								// },
+								// //{ field: 'VC_ProjectZX', title: '项目名称', width: 190 },
+								{
+									title: '操作',
+									toolbar: '#barDemo',
+									align: 'center',
+									fixed: 'right',
+									width: 150
+								},
+							]
+						],
+						limit: 20,
+						page: {
+							limits: [10, 20, 30, 50, 100, 200, 300, 400, 500],
+							prev: '上一页',
+							next: '下一页',
+							layout: ['prev', 'page', 'next', 'limit', 'count', 'skip']
+						}
+						// size: 20,
+						// page: true
+					});
+
+				},
+				//封装ajax,获取自己参保数据,刷新表格
+				Fun_Ajax_Table_Data3: function (_url, _data) {
+					return table.render({
+						elem: '#CB_local_table',
+						method: 'post',
+						url: _url,
+						height: 'full-190',
+						headers: {
+							'authorization': sessionToken.access_token
+							// 'authorization': 'eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiI2IiwiQVVUSE9SSVRJRVNfS0VZIjoiNiIsImV4cCI6MTUzNjgyMTg4OX0.RDU5XY7M1jvm46IDY3kSSRUCB9pNpColeUXnr_MROsxAbC7oGWpzmKEJx4H8Vf1hjMSDgTWQWdqn7dv3h9TNzw'
+						},
+						parseData: function (res) { //res 即为原始返回的数据
+							return {
+								"code": res.code, //解析接口状态
+								"msg": res.msg, //解析提示文本
+								"totalElements": res.data.totalElements, //解析数据长度
+								"data": res.data.content //解析数据列表
+							};
+							// debugger;
+						},
+						where: _data,
+						request: {
+							// pageName: 'page' //页码的参数名称，默认：page
+							// 	,
+							limitName: 'pageSize' //每页数据量的参数名，默认：limit
+						},
+						response: {
+							statusName: 'code',
+							statusCode: 1,
+							msgName: 'msg',
+							countName: 'totalElements',
+
+						},
+						done: function (res) {
+							if (res.code == 2) {
+								layer.msg(res.msg + ',即将跳转登录界面');
+								var tmid = window.setTimeout(function () {
+									top.location.href = 'login.html'
+									window.clearTimeout(tmid);
+								}, 1500);
+
+							}
+							// layer.closeAll('loading');
+						},
+						text: {
+							none: '<p align="center" style="padding:50px 50px">无数据</p>'
+						},
+						cols: [
+							[
+								 {
+								 	type: 'checkbox',
+								 	fixed: 'left'
+								 },
+								{
+									title: '序号',
+									width: 60,
+									event: 'event_detail',
+									type: 'numbers',
+//									template:function(e){
+//										
+//									}
+								},
+								{
+									field: 'name',
+									title: '参保人员姓名',
+									width: 180
+								},
+								{
+									field: 'sex',
+									title: '性别',
+									width: 150,
+									// align: 'right',
+
+								},
+								{
+									field: 'idCard',
+									title: '身份证号码',
+									width: 150,
+
+								},
+								{
+									field: 'county',
+									title: '区县',
+									width: 180,
+								},
+								{
+									field: 'userType',
+									title: '参保人员类别',
+									width: 150,
+								},
+								{
+									field:'insuredNum',
+									title:'统筹区划编码',
+									width: 180
+								},
+								{
+									field:'insuredCity',
+									title:'统筹区划名称',
+									width: 180
+								},
+								{
+									field: 'bankCard',
+									title: '银行卡号',
+									width: 90,
+								},
+								{
+									field: 'tel',
+									title: '联系方式',
+									width: 180
+								},
+								{
+									field: 'accountholder',
+									title: '开户行',
+									width: 180
+								}, {
+									field: 'bankname',
+									title: '开户人',
+									width: 180
+								}, {
+									field: 'underwritecompany',
+									title: '承保公司',
+									width: 180
+								}, {
+									field: 'servicecompany',
+									title: '服务保险公司',
+									width: 180
+								}, {
+									field: 'insurancetype',
+									title: '所属险种',
+									width: 180
+								},{
+									field: 'correctiontime',
+									title: '批改时间',
+									width: 180
+								},{
+									field: 'premium',
+									title: '批增保费',
+									width: 180
+								},{
+									field: 'correctionnumber',
+									title: '批改保单号',
+									width: 180
+								}, {
+									title: '操作',
+									toolbar: '#barDemo1',
+									align: 'center',
+									fixed: 'right',
+									width: 150
+								}
+							]
+						],
+						limit: 20,
+						page: {
+							limits: [10, 20, 30, 50, 100, 200, 300, 400, 500],
+							prev: '上一页',
+							next: '下一页',
+							layout: ['prev', 'page', 'next', 'limit', 'count', 'skip']
+						}
+						// size: 20,
+						// page: true
+					});
+
+				},
+			}
+			//---------
+			var dataJZ = {};
+			dataJZ.underwrite_company = $('.bxgs option:selected').val();
+			dataJZ.time = $('.timeJZ').val();
+			console.log(dataJZ);
+			// layer.load();
+			tableIns = Active.Fun_Ajax_Table_Data(_url_JZ, dataJZ);
+			//监听tab切换事件
+			element.on('tab(fen_tab)', function (data) {
+				// console.log(this); //当前Tab标题所在的原始DOM元素
+				console.log(data.index); //得到当前Tab的所在下标
+				if (data.index == 0) {
+					var dataJZ0 = {};
+					dataJZ0.underwrite_company = $('.bxgs option:selected').val();
+					dataJZ0.time = $('.timeJZ').val();
+					// layer.load(); 
+					tableIns.reload({
+						page: {
+							curr: 1 //重新从第 1 页开始
+						},
+						where: dataJZ0
+					});
+					Active.Fun_Ajax_Table_Data2(_url_JZ, dataJZ);
+					// tabMark = 1;
+				} else if (data.index == 1) {
+					//加载日期选择
+					$('.startTime').each(function () {
+						laydate.render({
+							elem: this, //使用this指向当前元素
+							position: 'abolute',
+							// type: 'month',
+							value: '2017-08-01'
+						});
+					});
+					$('.endTime').each(function () {
+						laydate.render({
+							elem: this, //使用this指向当前元素
+							position: 'abolute',
+							// type: 'month',
+							value: '2018-08-01'
+						});
+					});
+					var dataJZ1 = {};
+					dataJZ1.underwriteCompany = $('.bxgs option:selected').val();
+					dataJZ1.startDate = $('.startTime').val();
+					dataJZ1.endDate = $('.endTime').val();
+					console.log(dataJZ1);
+					// layer.load();
+					tableIns1 = Active.Fun_Ajax_Table_Data1(_url_CB, dataJZ1);
+					// tabMark = 0;
+				} else if (data.index == 2) {
+					var dataJZ2 = {};
+					dataJZ2.underwrite_company = $('.bxgs_local option:selected').val();
+					console.log(dataJZ2);
+					// layer.load();
+					tableIns2 = Active.Fun_Ajax_Table_Data2(_url_local_JZ, dataJZ2);
+					// tabMark = 0;
+				} else if (data.index == 3) {
+					// layer.load();
+					tableIns3 = Active.Fun_Ajax_Table_Data3(_url_local_CB, null);
+					// tabMark = 0;
+				}
+
+			});
+			//新增推送参保人员
+			$('#add_CB_Data').on('click',function(){
+				var ids = [];
+				var checkStatus = table.checkStatus('CB_local_table'),
+					data = checkStatus.data;
+				if (data.length < 1) {
+					layer.msg('请选择要新增参保人员的数据');
+				} else {
+					for (var i = 0; i < data.length; i++) {
+						ids.push(data[i].id);
+					}
+					ids = ids.join(',')
+					
+					layer.confirm('确定新增这' + data.length + '条数据到参保人员吗?', function (index) {
+						console.log(ids);
+						fun_push_lp_data(ids, objTool.url + 'civilAffairsBureau/addParticipationData');
+						tableIns3.reload({
+							page: {
+								curr: 1 //重新从第 1 页开始
+							}
+						});
+						ids = [];
+					});
+				}
+			});
+			//监听顶部事件操作
+			//监听提交
+			//tab1
+			form.on('submit(JZ_fresh)', function (data) {
+				// layer.msg(JSON.stringify());
+				// return false;
+				tableIns.reload({
+					page: {
+						curr: 1 //重新从第 1 页开始
+					},
+					where: data.field
+				});
+			});
+			//导入事件
+			//tab
+			$('#import2').on('click', function () {
+				layer.open({
+					type: 2,
+					shadeClose: true,
+					title: "",
+					shade: [0.9, '#f8f8f8'],
+					area: ['50%', '40%'],
+					content: 'mzj_view/upload.html'
+				});
+			});
+			//tab2
+			form.on('submit(CB_fresh)', function (data) {
+				// layer.msg(JSON.stringify());
+				// return false;
+				tableIns1.reload({
+					page: {
+						curr: 1 //重新从第 1 页开始
+					},
+					where: data.field
+				});
+			});
+			//tab3
+			$('#JZ_local_fresh').on('click', function () {
+				tableIns2.reload({
+					page: {
+						curr: 1 //重新从第 1 页开始
+					}
+				});
+			});
+			//tab4
+			//模糊查询
+			$('#CB_local_fresh').on('click', function () {
+				tableIns3.reload({
+					page: {
+						curr: 1 //重新从第 1 页开始
+					}
+				});
+
+			});
+
+
+
+			//监听工具条操作
+			table.on('tool(CB_local_table)', function (obj) {
+				var data = obj.data;
+				var layEvent = obj.event;
+				var tr = obj.tr;
+				if (layEvent === 'detail1') {
+					// layer.msg('详情');
+					window.localStorage.setItem('protectpersonnel', JSON.stringify(data));
+					layer.open({
+						type: 2,
+						shadeClose: true,
+						title: '<h2>详情查看</h2>',
+						shade: [0.9, '#f8f8f8'],
+						area: ['98%', '95%'],
+						content: 'mzj_view/detail.html'
+					});
+					
+				} else if (layEvent === 'del1') {
+					layer.confirm('确定删除该笔数据吗?', function (index) {
+						// fun_delect("del_Business", data.ID, "DZ_BX_Edit.ashx");
+						// alert(data.id);
+						fun_delect_data(data.id, objTool.url + 'civilAffairsBureau/deleteParticipation');
+						tableIns3.reload({
+							page: {
+								curr: 1 //重新从第 1 页开始
+							}
+						});
+					});
+				} else if (layEvent === 'edit1') {
+					// layer.msg('编辑');
+					layer.open({
+						type: 2,
+						shadeClose: true,
+						title: "",
+						shade: [0.9, '#f8f8f8'],
+						area: ['98%', '95%'],
+						content: 'fgs_view/edit.html?mark=' + mark + '&id=' + data.id + '&time=' + new Date()
+					});
+				}
+			});
+			//tab2
+			table.on('tool(Fk_Ifon2)', function (obj) {
+				var data = obj.data;
+				var layEvent = obj.event;
+				var tr = obj.tr;
+				if (layEvent === 'detail') {
+					// layer.msg('详情');
+					layer.open({
+						type: 2,
+						shadeClose: true,
+						title: '<h2>详情查看</h2>',
+						shade: [0.9, '#f8f8f8'],
+						area: ['98%', '95%'],
+						content: 'fgs_view/detailTab2.html?mark=' + mark + '&id=' + data.id
+					});
+				} else if (layEvent === 'del') {
+					layer.confirm('确定删除该笔数据吗?', function (index) {
+						fun_delect_data(data.id, objTool.url + 'filiale/deleteAccountBookTwo');
+						tableIns2.reload({
+							page: {
+								curr: 1 //重新从第 1 页开始
+							}
+						});
+					});
+				} else if (layEvent === 'edit') {
+					// layer.msg('编辑');
+					layer.open({
+						type: 2,
+						shadeClose: true,
+						title: "",
+						shade: [0.9, '#f8f8f8'],
+						area: ['98%', '95%'],
+						content: 'fgs_view/editTab2.html?mark=' + mark + '&id=' + data.id + '&time=' + new Date()
+					});
+				}
+			});
+			/**
+			 * 推送参保人员方法
+			 * */
+
+			function fun_push_lp_data(ID, _url) {
+				$.ajax({
+					type: "POST",
+					timeout: 10000, // 超时时间 10 秒
+					async: false,
+					headers: {
+						'authorization': sessionToken.access_token
+						// 'authorization': 'eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiI2IiwiQVVUSE9SSVRJRVNfS0VZIjoiNiIsImV4cCI6MTUzNjgyMTg4OX0.RDU5XY7M1jvm46IDY3kSSRUCB9pNpColeUXnr_MROsxAbC7oGWpzmKEJx4H8Vf1hjMSDgTWQWdqn7dv3h9TNzw'
+					},
+					url: _url,
+					data: {
+						'id': ID
+					},
+					success: function (res) {
+						// res = JSON.parse(res);
+						//检查返回的标志
+						if (res.code == 1) {
+							layer.msg(res.msg);
+						} else if (res.code == 2) {
+							layer.msg(res.msg + ',即将跳转登录界面');
+							var tmid = window.setTimeout(function () {
+								top.location.href = 'login.html'
+								window.clearTimeout(tmid);
+							}, 1500);
+
+						} else {
+							layer.msg(res.msg);
+						}
+					},
+					error: function (err) {},
+					complete: function (XMLHttpRequest, status) { //请求完成后最终执行参数　
+					}
+				});
+
+			};
+			
+			/**
+			 * 删除数据方法
+			 * */
+			function fun_delect_data(ID, _url) {
+				$.ajax({
+					type: "POST",
+					timeout: 10000, // 超时时间 10 秒
+					async: false,
+					headers: {
+						'authorization': sessionToken.access_token
+						// 'authorization': 'eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiI2IiwiQVVUSE9SSVRJRVNfS0VZIjoiNiIsImV4cCI6MTUzNjgyMTg4OX0.RDU5XY7M1jvm46IDY3kSSRUCB9pNpColeUXnr_MROsxAbC7oGWpzmKEJx4H8Vf1hjMSDgTWQWdqn7dv3h9TNzw'
+					},
+					url: _url,
+					data: {
+						'id': ID
+					},
+					success: function (res) {
+						// res = JSON.parse(res);
+						//检查返回的标志
+						if (res.code == 1) {
+							layer.msg(res.msg);
+						} else if (res.code == 2) {
+							layer.msg(res.msg + ',即将跳转登录界面');
+							var tmid = window.setTimeout(function () {
+								top.location.href = 'login.html'
+								window.clearTimeout(tmid);
+							}, 1500);
+
+						} else {
+							layer.msg('请求失败');
+						}
+					},
+					error: function (err) {},
+					complete: function (XMLHttpRequest, status) { //请求完成后最终执行参数　
+					}
+				});
+
+			};
+			//---------end---------
+
+
+
+		});
+	</script>
+</body>
+
+</html>

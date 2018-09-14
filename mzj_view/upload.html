@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>Table</title>
+    <link rel="stylesheet" href="../plugins/layui2/css/layui.css" media="all" />
+    <!-- <link rel="stylesheet" href="css/global.css" media="all">
+    <link rel="stylesheet" href="plugins/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="css/table.css" /> -->
+    <style>
+        .mod-header {
+            background: #FFF;
+            /* padding: 2px 20px; */
+            border-bottom: 1px solid #35afee;
+            width: 100%;
+            position: fixed;
+            top: 1px;
+            left: 0px;
+            z-index: 9999;
+            height: 45px;
+        }
+
+        .mod-header .title {
+            font-size: 28px;
+            color: #35afee;
+            font-weight: bold;
+            margin-left: 20px;
+            line-height: 45px;
+        }
+    </style>
+</head>
+
+
+<body>
+    <div class="layui-container" style="margin-top:75px">
+        <div class="mod-header">
+            <!-- <img src="../../img/icon_business/借款.png" /> -->
+            <span class="title">文件上传</span>
+            <button class="layui-btn  layui-btn-radius layui-btn-primary" id="upload_info" style="margin-right:20px;margin-top:3px; color: #fff; float: right; background: #1296db">
+                <i class="layui-icon">&#x1005;</i>
+                确定
+            </button>
+        </div>
+        <div class="layui-row" style="margin-top:50px">
+            <button type="button" class="layui-btn" id="upload_file">
+                <i class="layui-icon">&#xe67c;</i>选择文件
+            </button>
+        </div>
+        <div class="layui-row" style="margin-top:20px">
+            <p id="demoText"></p>
+        </div>
+    </div>
+
+
+
+    <!-- <script type="text/javascript" src="plugins/layui2/layui.js"></script> -->
+
+
+</body>
+<script type="text/javascript" src="../plugins/layui2/layui.js"></script>
+<script type="text/javascript" src="../js/tool.js"></script>
+<script>
+    layui.use(['form', 'layedit', 'laydate', 'element', 'jquery', 'upload', 'laytpl'], function () {
+        var upload = layui.upload;
+        var form = layui.form,
+            layer = layui.layer,
+            layedit = layui.layedit,
+            element = layui.element,
+            laydate = layui.laydate,
+            laytpl = layui.laytpl
+        $ = layui.jquery;
+        // layer.load();
+        //1.总公司 2.分公司 3.民政局
+        // var tabMark = objTool.getUrlParam('tabMark');
+        //该条数据的id
+        var id = objTool.getUrlParam('id');
+        //获取token,关闭页面失效
+        var sessionToken = layui.sessionData('token');
+        var index = parent.layer.getFrameIndex(window.name);
+        //分公司url地址\参数\请求参数
+        //单条数据加载url
+        var _urlTab;
+        //单条数据编辑提交url
+        // var _urlTab2 = objTool.url + 'filiale/AccountBookOneUpload';
+        var data2 = {
+            id: id,
+            page: 0,
+            size: 1
+        }
+        var resData2;
+        _urlTab = objTool.url + 'civilAffairsBureau/uploadingParticipation';
+        //分公司
+        Fun_Ajax_upload_data(_urlTab);
+        /*
+         *上传文件封装
+         **/
+        function Fun_Ajax_upload_data(_url) {
+            var uploadInst = upload.render({
+                elem: '#upload_file',
+                url: _url,
+                type: "POST",
+                headers: {
+                    'authorization': sessionToken.access_token
+                    // 'authorization': 'eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiI2IiwiQVVUSE9SSVRJRVNfS0VZIjoiNiIsImV4cCI6MTUzNzE0ODgwM30.--8v32yPgtLlHlZy5JhWvlVEWqB_WrZdU7L1hnZDG8_kdPAjbV5uPvj5KCiTqexioUw6Z551LdkWh3J0mgDZlQ'
+                },
+                accept: 'file', //允许上传的文件类型
+                auto: false, //选择文件后不自动上传
+                size: '15360',
+                exts: 'xls|xlsx|xlsm|xlt|xltx|xltm',
+                bindAction: '#upload_info', //指向一个按钮触发上传
+                before: function (obj) {
+                    //预读本地文件示例，不支持ie8      
+                },
+                done: function (res) {
+                    // alert('sahncghuan')
+                    //如果上传失败
+                    console.log(res,1111);
+                    if (res.code == 0) {
+                        return layer.msg(res.msg);
+
+                    } else if (res.code == 2) {
+                        layer.msg(res.msg + ',即将跳转登录界面');
+                        var tmid = window.setTimeout(function () {
+                            top.location.href = 'login.html'
+                            window.clearTimeout(tmid);
+                        }, 1500);
+
+                    } else {
+                        layer.msg(res.msg);
+                        var tmid = window.setTimeout(function () {
+                            parent.layer.close(index);
+                            window.clearTimeout(tmid);
+                        }, 500);
+
+
+                    }
+
+                    //上传成功
+                },
+                error: function () {
+                    //演示失败状态，并实现重传
+                    var demoText = $('#demoText');
+                    demoText.html(
+                        '<span style="color: #FF5722;">上传失败</span> <a class="layui-btn layui-btn-xs demo-reload">重试</a>'
+                    );
+                    demoText.find('.demo-reload').on('click', function () {
+                        uploadInst.upload();
+                    });
+                }
+            });
+
+        }
+
+    });
+</script>
+
+</html>
